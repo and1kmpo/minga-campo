@@ -12,7 +12,8 @@ import logoFooter from './assets/logoFooter.svg';
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
-  
+  const d_left = "M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z";
+  const d_right = "M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z";
   return (
 <div className="bg-cover bg-no-repeat bg-center flex flex-col justify-between min-h-screen overflow-hidden text-white" style={{ backgroundImage: `url(${backgroundImg})` }}>
       <div className="p-5">
@@ -62,9 +63,31 @@ function App() {
       </div>
 
 
-<footer className="flex flex-col w-full justify-between items-center pb-5 bg-white">
-    <img src={backgroundFooter} alt="fondo anime footer" className="object-cover hidden w-full h-60 rounded-[0px_0px_50%_50%] md:flex"/>
+{/* Carousel */}
+<div className="hidden md:flex items-center justify-center mt-5 px-10 md:justify-evenly md:h-96 md:w-full bg-white">  
+  <div className="bg-primary w-[90%] h-[60%] rounded-lg flex justify-evenly items-center">
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={d_left} />
+  </svg>
+    <img className="ml-20 h-64 self-end" src="src/assets/imgCarousel.png" alt="imagen manga" />
+    <img className="h-56 mb-12 self-end" src="src/assets/coverCarousel.png" alt="cover manga" />
+    <div className="text-lg px-32 text-black sm:w-10/12 xl:w-6/12">
+      <h3 className="text-2xl pb-4">Título</h3>
+      <p className="text-xs xl:text-sm">Descripción</p>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={d_right} />
+    </svg>
+  </div>
+</div>
 
+
+
+
+<footer className="flex flex-col w-full justify-between items-center pb-5 bg-white">
+  
+  <img src={backgroundFooter} alt="fondo anime footer" className="object-cover hidden w-full h-60 rounded-[0px_0px_50%_50%] md:flex"/>
+  
   <div className="flex flex-col items-center w-full md:w-11/12 md:flex-row md:justify-between">
     
     <div className="flex justify-between items-center mt-4 mb-4 text-black"> 
@@ -72,7 +95,7 @@ function App() {
         <a className="text-xl">Mangas</a>
     </div>
 
-        <img src={logoFooter} alt="logo minga footer" className="w-40"/>
+    <img src={logoFooter} alt="logo minga footer" className="w-40"/>
         
     <div className="flex flex-col items-center mt-6">
       <div className="flex w-full justify-evenly mb-2">
@@ -85,7 +108,6 @@ function App() {
       <button className="bg-gradient-to-r from-[#4338CA] to-[#5E52F3] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full">
         Donate <span role="img" aria-label="heart">🤍</span>
       </button>
-  
     </div>
 
   </div>
