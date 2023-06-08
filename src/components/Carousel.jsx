@@ -1,4 +1,4 @@
-export default function Carousel() {
+export default function Carousel({character_photo, cover_photo, name, description}) {
   const d_left = "M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z";
   const d_right = "M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z";
   return (
@@ -7,11 +7,11 @@ export default function Carousel() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={d_left} />
             </svg>
-            <img className="ml-20 h-64 self-end" src="src/assets/imgCarousel.png" alt="imagen manga" />
-            <img className="h-56 mb-12 self-end rounded-lg" src="src/assets/coverCarousel.png" alt="cover manga" />
+            <img className="ml-20 h-64 self-end" src={character_photo} alt="imagen manga" />
+            <img className="h-56 mb-12 self-end rounded-lg" src={cover_photo} alt="cover manga" />
             <div className="text-lg px-32 text-black sm:w-10/12 xl:w-6/12">
-                <h3 className="text-2xl text-white pb-4">Título</h3>
-                <p className="text-xs text-white xl:text-sm">Descripción</p>
+                <h3 className="text-2xl text-white pb-4">{name}</h3>
+                <p className="text-xs text-white xl:text-sm">{description}</p>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 cursor-pointer" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={d_right} />
