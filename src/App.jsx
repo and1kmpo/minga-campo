@@ -1,8 +1,7 @@
-
+import Main from './layouts/Main'
 import backgroundImg from './assets/background.png';
-import NavBar from "./components/NavBar";
 import Index from './pages/Index';
-import Footer from "./components/Footer";
+
 
 function App() {
   let data = [
@@ -15,9 +14,9 @@ function App() {
 ]
   return (
 <div className="bg-cover bg-no-repeat bg-center flex flex-col justify-between min-h-screen overflow-hidden text-white" style={{ backgroundImage: `url(${backgroundImg})` }}>
-      <NavBar/>   
-      <Index data={data}/>
-      <Footer/>
+       <Main>
+        <Index data={data}/>
+      </Main>
     </div>
 
   );
