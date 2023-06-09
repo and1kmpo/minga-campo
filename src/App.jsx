@@ -1,3 +1,4 @@
+
 import backgroundImg from './assets/background.png';
 import NavBar from "./components/NavBar";
 import Index from './pages/Index';
@@ -18,7 +19,7 @@ function App() {
       <Index data={data}/>
       <Footer/>
     </div>
-    
+
   );
 }
 
