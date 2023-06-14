@@ -13,10 +13,12 @@ export default function Carousel() {
     () => {
       axios(apiUrl+'/categories')
         .then(res=>{
+
           setCategories(res.data.response);
         }).catch(err =>console.log(err))
       },[]
 );
+
 
   const [counter, setCounter] = useState(0);
   const next = ()=>{
@@ -29,15 +31,18 @@ export default function Carousel() {
     setCounter(counter -1);
     console.log(counter);
 }
+
   return (
     <div className="hidden md:flex items-center justify-center mt-5 px-10 md:justify-evenly md:h-96 md:w-full bg-white">  
         <div className="bg-primary w-[90%] h-[60%] rounded-lg flex justify-evenly items-center">
             <Arrow d={d_left } onClick={prev}/>
+
             <img className="ml-20 h-64 self-end" src={categories[counter]?.character_photo} alt="imagen manga" />
             <img className="h-56 mb-12 self-end rounded-lg" src={categories[counter]?.cover_photo} alt="cover manga" />
             <div className="text- px-32 text-black sm:w-10/12 xl:w-6/12">
                 <h3 className="text-3xl text-white pb-2 capitalize">{categories[counter]?.name}</h3>
-                <p className="text-xs text-white xl:text-sm">{categories[counter]?.description}</p>
+                <p className="text-xs text-white xl:text-sm">{categories[counter]?.description}</p>           
+
             </div>
             <Arrow d={d_right} onClick={next}/>
         </div>
