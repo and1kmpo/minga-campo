@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
+
+const optionMenu = ["Home", "Mangas", "My Mangas", "Favorites", "Logout"];
+
 export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
   return (
@@ -24,21 +27,31 @@ export default function NavBar() {
       </div>
 
       {showMenu && (
-        <div className="fixed top-0 right-0 bg-red-400 flex flex-col justify-between w-full h-full p-4 z-50 transition-all duration-500">
-          <div className="flex items-start justify-between">
+        <div className="fixed top-0 left-0 p-10 bg-primary flex flex-col  w-full lg:w-1/3 h-full z-50 transition-all duration-500">
+          <div className="flex items-center justify-between">
             <div className="flex ml-2">
-              <img className="rounded-full mr-2" src="http://placeholder.com/50/50" alt="" />
+              <img className="rounded-full mr-4" src="http://placeholder.com/50/50" alt="" />
               <div className="flex flex-col">
-                <p>nombre</p>
-                <p>correo</p>
+                <p className="capitalize">Nombre del usuario</p>
+                <p className="text-[#D1D3D4]">email@email.com</p>
               </div>
             </div>
             <button onClick={() => setShowMenu(false)}>
               <RiCloseFill className="text-3xl" />
             </button>
           </div>
+          <div className="pt-5">
+            {optionMenu.map((option, index) => (
+              <p key={index} className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">{option}</p>
+            ))}
+          </div>
         </div>
       )}
     </nav>
   );
 }
+
+
+/* {optionMenu.map((option, index) => (
+  <p key={index} className="text-white mb-4">{option}</p>
+))} */
