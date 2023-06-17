@@ -1,13 +1,14 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import { Outlet } from 'react-router-dom';
 
-export default function Main({children}) {
+export default function Main() {
   return (
     <>
-    <NavBar/>
-        {/*  Vistas dinámicas */}
-        {children}
-    <Footer/>
+      <NavBar />
+      {/*  Vistas dinámicas */}
+      <Outlet />
+      <Footer />
     </>
   )
 }
