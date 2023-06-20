@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
-
+import { Link } from "react-router-dom";
 const optionMenu = ["Home", "Mangas", "My Mangas", "Favorites", "Logout"];
 
 export default function NavBar() {
@@ -15,13 +15,13 @@ export default function NavBar() {
         </svg>
       </button>
       <div>
-        <svg width="54" height="33" viewBox="0 0 54 33"fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+        <svg width="54" height="33" viewBox="0 0 54 33" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <rect y="0.5" width="54" height="32" fill="url(#pattern0)" />
           <defs>
             <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
               <use xlinkHref="#image0_12940_634" transform="scale(0.0123457 0.0208333)" />
             </pattern>
-            <image id="image0_12940_634" width="81" height="48" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAAAwCAYAAABpJ5bJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADySURBVHgB7dsxCsIwGEDhXxEFL2CdxUnwMM6ewNXTuIqzVxGdRNztLgi6qKu0FUtf1eF9YwKBPpKpSeP+FKqkGarMiAAjAowIaOUNzmf72G7OoVeL5SgGw25mPHcnpuktlHU8XHLHPc4AIwKMCDAiwIgAIwKMCDAiwIiAVtRotR5H0u8Uzqena0wnu/i3tcuqdSe++8hP5n+1dlkeZ4ARAUYEGBFgRIARAUYEGBFgRIARAUYEGBFgRIARAUYEGBFgRIARAUYEGBFgRIARAUYEGBGQewMiSdrxLb0af7LTaxddCGj4LK06jzPAiAAjAowIeABa3yGPMJiO2wAAAABJRU5ErkJggg=="/>
+            <image id="image0_12940_634" width="81" height="48" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAAAwCAYAAABpJ5bJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADySURBVHgB7dsxCsIwGEDhXxEFL2CdxUnwMM6ewNXTuIqzVxGdRNztLgi6qKu0FUtf1eF9YwKBPpKpSeP+FKqkGarMiAAjAowIaOUNzmf72G7OoVeL5SgGw25mPHcnpuktlHU8XHLHPc4AIwKMCDAiwIgAIwKMCDAiwIiAVtRotR5H0u8Uzqena0wnu/i3tcuqdSe++8hP5n+1dlkeZ4ARAUYEGBFgRIARAUYEGBFgRIARAUYEGBFgRIARAUYEGBFgRIARAUYEGBFgRIARAUYEGBGQewMiSdrxLb0af7LTaxddCGj4LK06jzPAiAAjAowIeABa3yGPMJiO2wAAAABJRU5ErkJggg==" />
           </defs>
         </svg>
       </div>
@@ -42,7 +42,11 @@ export default function NavBar() {
           </div>
           <div className="pt-5">
             {optionMenu.map((option, index) => (
-              <p key={index} className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">{option}</p>
+              <Link key={index} to={'/'}>
+                <p className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">
+                  {option}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
