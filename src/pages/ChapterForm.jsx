@@ -27,10 +27,10 @@ export default function chapterForm() {
 
     return (
         <>
-            <main className=' flex items-start justify-between w-full min-h-screen    '>
+            <main className=' flex w-full min-h-screen items-center justify-between overflow-x-hidden mb-6 font-roboto '>
                 <img className=" h-screen w-[50%] object-cover hidden md:block " src={imgForm} alt="chapterForm" />
-                <div className='  flex flex-col  mt-[40%] md:mt-[20%] lg:mt-[15%] justify-center items-center  w-screen lg:w-[50%] lg:left-[50%] '>
-                    <h1 className='font-roboto  text-4xl text-center '> New Chapter</h1>
+                <div className='  flex flex-col  mt-[10%] md:mt-[20%] lg:mt-[15%] justify-center items-center  w-screen lg:w-[50%] lg:left-[50%] '>
+                    <h1 className=' text-4xl text-center '> New Chapter</h1>
                     <div className='flex flex-col mt-8 gap-6'>
 
                         <input ref={titleForm} className=" px-4 h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple  " type="text" name="titleForm" id="titleForm" placeholder="Insert title" required />
