@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-const optionMenu = ["Home", "Mangas", "My Mangas", "Favorites", "Logout"];
 
 export default function NavBar() {
+
+  let optionMenu = [
+    { to: '/', title: "Home" },
+    { to: '/', title: "Comics" },
+    {to: '/manga-form', title: "New Manga" },
+    {to: 'manga/:manga_id/chapter-form', title: "New Chapter" },
+    // { to: '/', title: "My Comics" },
+    // { to: '/', title: "Favorites" },
+    { to: '/signin', title: "Sign In" },
+    {to: '/register', title: "Register" },
+    { to: '/', title: "Logout" }
+  ]
+
+
   const [showMenu, setShowMenu] = useState(false);
   return (
     <nav className="flex justify-between items-center p-5">
@@ -42,9 +55,9 @@ export default function NavBar() {
           </div>
           <div className="pt-5">
             {optionMenu.map((option, index) => (
-              <Link key={index} to={'/'}>
+              <Link key={index} to={option.to}>
                 <p className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">
-                  {option}
+                  {option.title}
                 </p>
               </Link>
             ))}
