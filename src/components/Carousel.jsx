@@ -21,16 +21,13 @@ export default function Carousel() {
 
 
   const [counter, setCounter] = useState(0);
-  const next = ()=>{
-    //counter = counter + 1;
-    setCounter(counter+1);
-    console.log(counter);
-  }
-  const prev = ()=>{
-    //counter = counter - 1;
-    setCounter(counter -1);
-    console.log(counter);
-}
+  const next = () => {
+    setCounter(prevCounter => (prevCounter === categories.length - 1 ? 0 : prevCounter + 1));
+  };
+
+  const prev = () => {
+    setCounter(prevCounter => (prevCounter === 0 ? categories.length - 1 : prevCounter - 1));
+  };
 
   return (
     <div className="hidden md:flex items-center justify-center mt-5 px-10 md:justify-evenly md:h-96 md:w-full bg-white">  
@@ -41,7 +38,7 @@ export default function Carousel() {
             <img className="h-56 mb-12 self-end rounded-lg" src={categories[counter]?.cover_photo} alt="cover manga" />
             <div className="text- px-32 text-black sm:w-10/12 xl:w-6/12">
                 <h3 className="text-3xl text-white pb-2 capitalize">{categories[counter]?.name}</h3>
-                <p className="text-xs text-white xl:text-sm">{categories[counter]?.description}</p>           
+                <p className="text-xs text-white xl:text-sm lg:w[200px]">{categories[counter]?.description}</p>           
 
             </div>
             <Arrow d={d_right} onClick={next}/>
