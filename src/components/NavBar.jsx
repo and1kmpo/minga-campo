@@ -11,6 +11,7 @@ export default function NavBar() {
     {to: 'manga/:manga_id/chapter-form', title: "New Chapter" },
     // { to: '/', title: "My Comics" },
     // { to: '/', title: "Favorites" },
+    { to: '/author-form', title: "New Author" },
     { to: '/signin', title: "Sign In" },
     {to: '/register', title: "Register" },
     { to: '/', title: "Logout" }

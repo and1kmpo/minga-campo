@@ -6,6 +6,7 @@ import MangaForm from './MangaForm';
 import ChapterForm from './ChapterForm';
 import SignIn from './Signin';
 import Register from './Register';
+import AuthorForm from './AuthorForm';
 
 const router = createBrowserRouter([{
     path: '/', // con una ruta renderizo un componente de tipo layout
@@ -19,7 +20,8 @@ const router = createBrowserRouter([{
         },
         {path: 'manga/:manga_id/chapter-form', element: <ChapterForm/>},
         {path: '/signin',element: <SignIn/>},
-        {path: '/register',element: <Register/>}
+        {path: '/register',element: <Register/>},
+        {path: '/author-form',element: <AuthorForm/>}
     
 
     ]
