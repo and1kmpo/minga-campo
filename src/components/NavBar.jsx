@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
-
-const optionMenu = ["Home", "Mangas", "My Mangas", "Favorites", "Logout"];
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
+
+  let optionMenu = [
+    { to: '/', title: "Home" },
+    { to: '/', title: "Comics" },
+    {to: '/manga-form', title: "New Manga" },
+    {to: 'manga/:manga_id/chapter-form', title: "New Chapter" },
+    {to: '/cia-form', title: "New Author" },
+    { to: '/signin', title: "Sign In" },
+    {to: '/register', title: "Register" },
+    { to: '/', title: "Logout" }
+  ]
+
+
   const [showMenu, setShowMenu] = useState(false);
   return (
     <nav className="flex justify-between items-center p-5 absolute w-full">
@@ -46,7 +58,11 @@ export default function NavBar() {
           </div>
           <div className="pt-5">
             {optionMenu.map((option, index) => (
-              <p key={index} className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">{option}</p>
+              <Link key={index} to={option.to}>
+                <p className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">
+                  {option.title}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
@@ -54,8 +70,3 @@ export default function NavBar() {
     </nav>
   );
 }
-
-
-/* {optionMenu.map((option, index) => (
-  <p key={index} className="text-white mb-4">{option}</p>
-))} */

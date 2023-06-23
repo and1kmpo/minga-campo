@@ -2,11 +2,10 @@ import backgroundImg from '../assets/background.png';
 
 export default function Welcome() {
     return (
-        <div className="flex flex-col justify-center items-center gap-6 px-5 mx-auto w-full h-screen bg-center bg-cover" style={{ backgroundImage: `url(${backgroundImg})`}}>
+        <div className="flex flex-col justify-center items-center gap-6 px-5 mx-auto w-full h-screen bg-center bg-cover text-white" style={{ backgroundImage: `url(${backgroundImg})`}}>
         <h1 className="text-4xl font-bold text-center">Your favorite comic book store</h1>
         <p className="text-base text-center">From classics to novelties, we have everything you need to immerse yourself in your favorite universes. Explore our catalog and live the adventure of your life.</p>
         <button className="bg-primary w-80 h-16 rounded-full">Get Started</button>
       </div>          
     )
 }
-/*    md:mt-5 md:mb-10 md:h-96 md:rounded-lg md:items-start md:flex-grow */
