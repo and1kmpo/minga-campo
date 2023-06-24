@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
@@ -7,27 +7,30 @@ export default function NavBar() {
   let optionMenu = [
     { to: '/', title: "Home" },
     { to: '/', title: "Comics" },
-    {to: '/manga-form', title: "New Manga" },
-    {to: 'manga/:manga_id/chapter-form', title: "New Chapter" },
-    // { to: '/', title: "My Comics" },
-    // { to: '/', title: "Favorites" },
+    { to: '/manga-form', title: "New Manga" },
+    { to: 'manga/:manga_id/chapter-form', title: "New Chapter" },
+    { to: '/cia-form', title: "New Company" },
     { to: '/signin', title: "Sign In" },
-    {to: '/register', title: "Register" },
+    { to: '/register', title: "Register" },
     { to: '/', title: "Logout" }
   ]
 
 
   const [showMenu, setShowMenu] = useState(false);
   return (
-    <nav className="flex justify-between items-center p-5">
-      <button onClick={() => setShowMenu(!showMenu)}>
-        <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11 16H37" stroke="#4338CA" strokeWidth="3" strokeLinecap="round" />
-          <path d="M11 27H37" stroke="#4338CA" strokeWidth="3" strokeLinecap="round" />
-          <path d="M11 39H37" stroke="#4338CA" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </button>
-      <div>
+    <nav className="flex justify-between items-center p-5 absolute w-full">
+      <div className="flex items-center">
+        <button onClick={() => setShowMenu(!showMenu)}>
+          <div>
+            <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 16H37" stroke="#4338CA" strokeWidth="3" strokeLinecap="round" />
+              <path d="M11 27H37" stroke="#4338CA" strokeWidth="3" strokeLinecap="round" />
+              <path d="M11 39H37" stroke="#4338CA" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </div>
+        </button>
+      </div>
+      <div className="flex items-center ml-auto">
         <svg width="54" height="33" viewBox="0 0 54 33" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
           <rect y="0.5" width="54" height="32" fill="url(#pattern0)" />
           <defs>
@@ -67,8 +70,3 @@ export default function NavBar() {
     </nav>
   );
 }
-
-
-/* {optionMenu.map((option, index) => (
-  <p key={index} className="text-white mb-4">{option}</p>
-))} */
