@@ -32,7 +32,7 @@ export default function SignIn() {
     }
 
     return (
-        <main className="flex w-full min-h-screen items-center justify-between overflow-x-hidden  ">
+        <main className="flex w-full min-h-screen flex items-center justify-between">
             <img className="hidden md:block  md:top-0 md:left-0 h-screen w-[50%] object-cover" src={signin_img} alt="signin" />
             <div className="flex flex-col justify-center items-center h-screen w-full md:w-[50%]">
                 <div className="flex items-center justify-center  ">
