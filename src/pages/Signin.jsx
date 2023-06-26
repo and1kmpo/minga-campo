@@ -1,45 +1,40 @@
-
 import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useRef } from "react"
 import signin_img from "../assets/signin.png"
 import icon_google from "../assets/Google.png"
-import logo_minga from '../assets/logoFooter.svg';
+import logo_minga from '../assets/logoFooter.svg'
+import axios from "axios"
+import apiUrl from "../apiUrl"
+import Swal from "sweetalert2"
 
 export default function SignIn() {
 
     const navigate = useNavigate()
-    const signin = () => {
+    const email = useRef()
+    const password = useRef()
 
+    const signin = () => {
         let data = {
             email: email.current.value,
             password: password.current.value
         }
-        console.log(data)
-        // // falta funcion onclick con camelcase, en el iput que quiero asignar el evento y el ref{} en los inputs
-        // navigate('/')
-
-
-        // //     axios.post(url)
-        // //     .then(res =>navigate('/'))
-        // // .cath(err=> console.log(err))
-        console.log(email)
-        console.log(email.current.value)
-        console.log(password.current.value)
-        setTimeout(() => navigate('/'), 3000)
-        // console.log(email.current.value) el ref devuelve un objeto current con una unica propiedad
-
-
+        //console.log(data)
+        axios.post(apiUrl+'/auth/signin',data)
+            .then(()=>Swal.fire({
+                icon: 'success'
+              }))
+            .then(()=>navigate('/'))
+            .catch(err=>Swal.fire({
+                icon: 'error',
+                text: 'sign in please!',
+                html: err.response.data.messages.map(each=>`<p>${each}</p>`).join('')
+              }))
     }
-
-    const email = useRef()
-    const password = useRef()
-
-
 
     return (
         <main className="flex w-full min-h-screen items-center justify-between overflow-x-hidden  ">
             <img className="hidden md:block  md:top-0 md:left-0 h-screen w-[50%] object-cover" src={signin_img} alt="signin" />
-            <div className="flex flex-col mt-[6%]  justify-center items-center h-screen w-full md:w-[50%]">
+            <div className="flex flex-col justify-center items-center h-screen w-full md:w-[50%]">
                 <div className="flex items-center justify-center  ">
                     <img src={logo_minga} alt="logo minga footer" className="w-40 mb-6" />
                 </div>
@@ -54,7 +49,7 @@ export default function SignIn() {
                         <img className="absolute  mt-4 ml-[40px] md:ml-[60px] lg:ml-[120px]" src={icon_google} alt="google" />
                     </div>
                 </form>
-                <p className="font-semibold text-[14px] mt-[10px] text-center p-2" >You don't have an account yet?    <Anchor to='/register' className="text-purple font-bold">Sign Up</Anchor>  </p>
+                <p className="font-semibold text-[14px] mt-[10px] text-center p-2" >You dont have an account yet?    <Anchor to='/register' className="text-purple font-bold">Sign Up</Anchor>  </p>
                 <p className="font-semibold text-[14px] text-center ">Go back to <Anchor to='/' className="text-purple hover:text-black font-bold">Home Page</Anchor></p>
             </div>
         </main>
