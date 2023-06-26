@@ -1,4 +1,4 @@
-import { Link as Anchor, useNavigate } from "react-router-dom"
+import { Link as Anchor } from "react-router-dom"
 import { useRef } from "react"
 import signin_img from "../assets/signin.png"
 import icon_google from "../assets/Google.png"
@@ -9,26 +9,29 @@ import Swal from "sweetalert2"
 
 export default function SignIn() {
 
-    const navigate = useNavigate()
     const email = useRef()
     const password = useRef()
 
     const signin = () => {
         let data = {
-            email: email.current.value,
+            email: email.current.value,       //accedo al valor de una referencia
             password: password.current.value
         }
         //console.log(data)
         axios.post(apiUrl+'/auth/signin',data)
-            .then(()=>Swal.fire({
-                icon: 'success'
-              }))
-            .then(()=>navigate('/'))
-            .catch(err=>Swal.fire({
-                icon: 'error',
-                text: 'sign in please!',
-                html: err.response.data.messages.map(each=>`<p>${each}</p>`).join('')
-              }))
+            .then(res=> {
+                localStorage.setItem('token',res.data.response.token)
+                localStorage.setItem('user',JSON.stringify(res.data.response.user))
+        })
+        .then(()=>Swal.fire({
+            icon: 'success'
+            }))
+        .then(()=>window.location.replace('/'))
+        .catch(err=>Swal.fire({
+            icon: 'error',
+            text: 'sign in please!',
+            html: err.response.data.messages.map(each=>`<p>${each}</p>`).join('')
+        }))
     }
 
     return (
