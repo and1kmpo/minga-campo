@@ -39,9 +39,9 @@ export default function MangaForm() {
 
   return (
     <>
-      <div className="flex justify-center">
-        <div className="grid gap-5 grid-cols-1 mb-6 my-16">
-          <div className='w-full'>
+      <div className="flex justify-center ">
+        <div className="grid gap-5 my-32 grid-cols-1 mb-6 w-72">
+          <div className=''>
             <input type="text" name='title' ref={inputTitle} className="border-b-indigo-500 text-sm rounded-lg  block w-full p-2.5" placeholder="Insert title" required></input>
             <hr className='bg-[#424242]' />
           </div>
