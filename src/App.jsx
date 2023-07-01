@@ -1,29 +1,28 @@
-import Main from './layouts/Main'
-<<<<<<< HEAD
+import { RouterProvider } from "react-router-dom"
+import router from "./router"
+import axios from "axios"
+import { useEffect } from "react"
+import apiURL from "./apiUrl"
 
-=======
->>>>>>> 232362a0a28839fa4e2165fa344602d997fcfe20
-import Index from './pages/Index';
-import backgroundImg from './assets/background.png';
-
-
+function header() {
+  let token = localStorage.getItem('token')
+  let headers = { headers:{ 'Authorization':`Bearer ${token}` } }
+  return headers
+}
 
 function App() {
+
+  useEffect(() => {
+    let token = localStorage.getItem('token')
+    if (token) {
+    let headers = header()
+      axios.post(apiURL+'/auth/token',null,headers)
+    }
+  },[])
+
   return (
-<<<<<<< HEAD
-<div className="bg-cover bg-no-repeat bg-center flex flex-col justify-between text-white h-96" >
-       <Main>
-        <Index/>
-=======
-    <div className="bg-cover bg-no-repeat bg-center flex flex-col justify-between min-h-screen overflow-hidden text-white" style={{ backgroundImage: `url(${backgroundImg})` }} >
-      <Main>
-        <Index />
->>>>>>> 232362a0a28839fa4e2165fa344602d997fcfe20
-      </Main>
-    </div>
-
-
+    <RouterProvider router={router}/>
   );
 }
 
-export default App;
+export default App

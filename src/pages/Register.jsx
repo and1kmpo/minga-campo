@@ -2,29 +2,39 @@ import { Link as Anchor, useNavigate } from "react-router-dom"
 import { useRef } from "react"
 import register_img from "../assets/register.png"
 import icon_google from "../assets/Google.png"
-
+import axios from "axios"
+import apiUrl from '../apiUrl'
+import Swal from "sweetalert2"
 
 export default function Register() {
 
     const navigate = useNavigate()
+    const email = useRef()
+    const photo = useRef()
+    const password = useRef()
+
     const register = () => {
         let data = {
             email: email.current.value,
             photo: photo.current.value,
             password: password.current.value
         }
-        console.log(data)
-        //data se envía en la petición POST al backend
-        //redirigir en caso de éxito
-        //mostrar alertas en caso de fracaso
-        setTimeout(() => navigate('/'), 5000)
+        //console.log(data)
+        axios.post(apiUrl+'/auth/register',data)
+            .then(()=>Swal.fire({
+                icon: 'success',
+                text: 'sign in please!'
+              }))
+            .then(()=>navigate('/signin'))
+            .catch(err=>Swal.fire({
+                icon: 'error',
+                text: 'sign in please!',
+                html: err.response.data.messages.map(each=>`<p>${each}</p>`).join('')
+              }))
     }
-    const email = useRef()
-    const photo = useRef()
-    const password = useRef()
 
     return (
-        <main className='flex w-full min-h-screen items-center justify-between font-roboto mb-10'>
+        <main className='flex w-full min-h-screen items-center justify-between font-roboto'>
             <div className="flex flex-col  md:top-0 md:right-[50%] justify-center items-center h-screen w-full md:w-[50%]">
                 <p className="font-semibold text-3xl text-center mt-6">Welcome!</p>
                 <p className="font-semibold text-sm mt-2 text-center p-2  w-[300px] md:w-[350px] lg:w-[400px] xl:w-[470px]">Discover manga, manhua and manhwa, track your progress, have fun, read manga.</p>
