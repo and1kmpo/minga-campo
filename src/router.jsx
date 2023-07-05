@@ -17,11 +17,12 @@ const router = createBrowserRouter([{
         {
             path: '/manga-form', element: <MangaForm />
         },
-        {path: 'manga/:manga_id/chapter-form', element: <ChapterForm/>},
-        {path: '/signin',element: <SignIn/>},
-        {path: '/register',element: <Register/>},
-        {path: '/cia-form',element: <CiaForm/>}
-    
+        { path: 'manga/:manga_id/chapter-form', element: <ChapterForm /> },
+        { path: '/signin', element: <SignIn /> },
+        { path: '/register', element: <Register /> },
+        { path: '/cia-form', element: <CiaForm /> },
+        { path: '/author-form', element: <CiaForm /> }
+
 
     ]
 }])
