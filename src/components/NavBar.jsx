@@ -1,67 +1,75 @@
 import { RiCloseFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios"
 import apiURL from "../apiUrl"
-
-function header() {
-  let token = localStorage.getItem('token')
-  let headers = { headers:{ 'Authorization':`Bearer ${token}` } }
-  return headers
-}
+import headers from "../utils/headers"
 
 async function signout(event) {
-  event.preventDefault()
+  event.preventDefault();
   try {
-    await axios.post(
-      apiURL+'/auth/signout',		//url a consumir
-      null,					            //objeto con data a enviar
-      header()				          //objeto con autorización
+    await axios.post(apiURL + 'auth/signout',
+      null,
+      headers()
     )
-    } catch (error) {
-      console.log(error)
+  } catch (error) {
+    console.log(error);
   }
   localStorage.removeItem('token')
   localStorage.removeItem('user')
   window.location.replace('/')
 }
 
+function catch_token(setOptions) {
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  setOptions([
+    { to: "/", title: "Home" },
+    { to: "/register", title: "Register" },
+    { to: "/signin", title: "Signin" },
+  ])
+}
+
 export default function NavBar() {
 
-  const [options,setOptions] = useState([
+  const [options, setOptions] = useState([
     { to: "/", title: "Home" }
   ])
-  const [photo,setPhoto] = useState()
-  const [email,setEmail] = useState()
+  const [photo, setPhoto] = useState()
+  const [email, setEmail] = useState()
   useEffect(() => {
     let token = localStorage.getItem('token')
     //console.log(token);
     if (token) {
-      let headers = header()
-        axios.post(apiURL+'/auth/token',null,headers)
-          .then(res=> {
+      axios.post(apiURL + '/auth/token', null, headers())
+        .then(res => {
+          if (res.data.response.user.role === 0) {
             setOptions([
               { to: "/", title: "Home" },
-              { to: '/manga/:manga_id/chapter-form', title: "New Chapter" },
-              { to: '/cia-form', title: "New Company" },
+              { to: '/author-form', title: "Create Author" },
+              { to: '/cia-form', title: "Create Company" },
               { to: "/", title: "Sign Out" }
             ])
-            setPhoto(res.data.response.user.photo)
-            setEmail(res.data.response.user.email)
-          })
-          .catch(()=>setOptions([
-            { to: "/", title: "Home" },
-            { to: "/register", title: "Register" },
-            { to: "/signin", title: "Sign In" }
-          ]))
+          } else if (res.data.response.user.role === 1 || res.data.response.user.role === 2) {
+            setOptions([
+              { to: "/", title: "Home" },
+              { to: "/manga-form", title: "Create Manga" },
+              { to: "/", title: "Sign Out" }
+            ])
+          } else if (res.data.response.user.role === 3) {
+            setOptions([
+              { to: "/", title: "Home" },
+              { to: "/", title: "Sign Out" }
+            ])
+          }
+          setPhoto(res.data.response.user.photo)
+          setEmail(res.data.response.user.email)
+        })
+        .catch(() => catch_token(setOptions))
     } else {
-      setOptions([
-        { to: "/", title: "Home" },
-        { to: "/register", title: "Register" },
-        { to: "/signin", title: "Sign In" }
-      ])
+      catch_token(setOptions)
     }
-  },[])
+  }, [])
   const [showMenu, setShowMenu] = useState(false)
 
   return (
@@ -103,7 +111,7 @@ export default function NavBar() {
             </button>
           </div>
           <div className="pt-5">
-            {options?.map((option, index) => option.title==='Sign Out' ? (
+            {options?.map((option, index) => option.title === 'Sign Out' ? (
               <a key={index} onClick={signout} href='/'>
                 <p className="text-white mb-4 hover:bg-white hover:text-primary rounded-md font-semibold p-3">
                   {option.title}
