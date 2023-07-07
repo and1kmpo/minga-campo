@@ -1,24 +1,25 @@
-import React from 'react'
 import imgForm from "../assets/form_Ch.png"
 // import { useNavigate } from "react-router-dom"
 import { useRef } from "react"
+import { useParams } from 'react-router-dom'
+import axios from "axios";
+import apiUrl from "../apiUrl";
 
-export default function chapterForm() {
-
-    const chapterForm = () => {
+export default function ChapterForm() {
+    const { manga_id } = useParams()
+    const captureData = () => {
         let dataForm = {
-            titleForm: titleForm.current.value,
+            title: titleForm.current.value,
             order: order.current.value,
-            pages: pages.current.value
-
+            pages: pages.current.value.split(','),
+            manga_id
         }
         console.log(dataForm)
-
-
-        console.log(titleForm.current.value)
-        console.log(order.current.value)
-        console.log(pages.current.value)
-
+        let token = localStorage.getItem('token')
+        let headers = { headers: { 'Authorization': `Bearer ${token}` } }
+        axios.post(apiUrl + '/chapters', dataForm, headers)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 
     const titleForm = useRef()
@@ -36,7 +37,7 @@ export default function chapterForm() {
                         <input ref={order} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple " type="text" name="order" id="order" placeholder="Insert order" required />
                         <input ref={pages} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple" type="text" name="pages" id="pages" placeholder="Insert pages" required />
                     </div>
-                    <input className="mt-10 w-[250px] lg:w-[280px]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple" type="button" value="Send" onClick={chapterForm} />
+                    <input className="mt-10 w-[250px] lg:w-[280px]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple" type="button" value="Send" onClick={captureData} />
                 </div>
             </main>
         </>
