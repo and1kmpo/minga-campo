@@ -19,13 +19,7 @@ const router = createBrowserRouter([{
         { path: '/cia-form', element: <CiaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 1 || JSON.parse(localStorage.getItem('user')).role === 2 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
         //Falta crear AuthorForm y NotAllowed
         { path: '/author-form', element: <CiaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 1 || JSON.parse(localStorage.getItem('user')).role === 2 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') }
-
-
     ]
 }])
-
-
-//Segundo en caso afirmativo redireccionar a home
-
 
 export default router;
