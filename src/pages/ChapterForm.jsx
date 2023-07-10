@@ -1,9 +1,11 @@
 import imgForm from "../assets/form_Ch.png"
-// import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useRef } from "react"
 import { useParams } from 'react-router-dom'
 import axios from "axios";
 import apiUrl from "../apiUrl";
+import Swal from "sweetalert2";
+import headers from "../utils/headers"
 
 export default function ChapterForm() {
     const { manga_id } = useParams()
@@ -18,24 +20,37 @@ export default function ChapterForm() {
         let token = localStorage.getItem('token')
         let headers = { headers: { 'Authorization': `Bearer ${token}` } }
         axios.post(apiUrl + '/chapters', dataForm, headers)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+            .then((res) => Swal.fire({
+                icon: 'success',
+                text: 'chapter added!'
+            }))
+
+            .catch(err => {
+                console.log(err.response)
+                Swal.fire({
+                    icon: 'error',
+                   text: ' Invalid Data'
+                })
+            })
     }
+
+
 
     const titleForm = useRef()
     const order = useRef()
     const pages = useRef()
 
+
     return (
         <>
-            <main className=' flex w-full min-h-screen items-center justify-between overflow-x-hidden mb-6 font-roboto '>
+            <main className=' flex w-full h-screen items-center justify-between overflow-x-hidden mb-6  '>
                 <img className=" h-screen w-[50%] object-cover hidden md:block " src={imgForm} alt="chapterForm" />
-                <div className='  flex flex-col  mt-[10%] md:mt-[20%] lg:mt-[15%] justify-center items-center  w-screen lg:w-[50%] lg:left-[50%] '>
-                    <h1 className=' text-4xl text-center '> New Chapter</h1>
-                    <div className='flex flex-col w-72 mt-8 gap-6'>
-                        <input ref={titleForm} className=" px-4 h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple  " type="text" name="titleForm" id="titleForm" placeholder="Insert title" required />
-                        <input ref={order} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple " type="text" name="order" id="order" placeholder="Insert order" required />
-                        <input ref={pages} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple" type="text" name="pages" id="pages" placeholder="Insert pages" required />
+                <div className='  flex flex-col   mt-[10%]  lg:mt-[5%] justify-center items-center  w-screen lg:w-[50%] lg:left-[50%] '>
+                    <h1 className=' text-3xl text-center font-semibold'> New Chapter</h1>
+                    <div className='flex flex-col mt-8 gap-4'>
+                        <input ref={titleForm} className=" px-4 h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple  " type="text" name="titleForm" id="titleForm" placeholder="Title" required />
+                        <input ref={order} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple " type="text" name="order" id="order" placeholder="Order" required />
+                        <input ref={pages} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple" type="text" name="pages" id="pages" placeholder="Pages" required />
                     </div>
                     <input className="mt-10 w-[250px] lg:w-[280px]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple" type="button" value="Send" onClick={captureData} />
                 </div>
