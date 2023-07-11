@@ -41,14 +41,14 @@ export default function ChapterForm() {
         .catch(err=> {console.log(err.response)
             Swal.fire({
             icon: 'error',
-            html: err.response.dataForm?.messages?.map(each=>`<p>${each}</p>`).join('')
+            html: err.response.data?.messages?.map(each=>`<p>${each}</p>`).join('')
         })})
 
             // .catch((err) => {
-            //     if (err.response && err.response.data && err.response.dataForn.message) {
+            //     if (err.response && err.response.data && err.response.data.message) {
             //       Swal.fire({
             //         icon: "error",
-            //         text: err.response.dataForm.message,
+            //         text: err.response.data.message,
             //       });
             //     } else {
             //       Swal.fire({
