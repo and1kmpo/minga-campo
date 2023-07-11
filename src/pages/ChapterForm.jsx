@@ -6,9 +6,18 @@ import axios from "axios";
 import apiUrl from "../apiUrl";
 import Swal from "sweetalert2";
 import headers from "../utils/headers"
+import rol from "../utils/rol"
 
 export default function ChapterForm() {
     const { manga_id } = useParams()
+    const titleForm = useRef()
+    const order = useRef()
+    const pages = useRef()
+    const navigate = useNavigate()
+
+    if (rol()===0 || null) {
+        window.location.replace('/') }
+
     const captureData = () => {
         let dataForm = {
             title: titleForm.current.value,
@@ -16,7 +25,11 @@ export default function ChapterForm() {
             pages: pages.current.value.split(','),
             manga_id
         }
-        console.log(dataForm)
+        if (order.current.value) {
+            dataForm.order = order.current.value?.trim()}
+       
+
+            console.log(dataForm)
         let token = localStorage.getItem('token')
         let headers = { headers: { 'Authorization': `Bearer ${token}` } }
         axios.post(apiUrl + '/chapters', dataForm, headers)
@@ -24,21 +37,37 @@ export default function ChapterForm() {
                 icon: 'success',
                 text: 'chapter added!'
             }))
+            .then(()=>navigate('/'))
+        .catch(err=> {console.log(err.response)
+            Swal.fire({
+            icon: 'error',
+            html: err.response.dataForm?.messages?.map(each=>`<p>${each}</p>`).join('')
+        })})
 
-            .catch(err => {
-                console.log(err.response)
-                Swal.fire({
-                    icon: 'error',
-                   text: ' Invalid Data'
-                })
-            })
+            // .catch((err) => {
+            //     if (err.response && err.response.data && err.response.dataForn.message) {
+            //       Swal.fire({
+            //         icon: "error",
+            //         text: err.response.dataForm.message,
+            //       });
+            //     } else {
+            //       Swal.fire({
+            //         icon: "error",
+            //         text: "Invalid Data",
+            //       })
+            //     }
+            //   })
+            // .catch(err => {
+            //     console.log(err.response)
+            //     Swal.fire({
+            //         icon: 'error',
+            //        text: 'Invalid Data'
+            //     })
+            //  })
+    
     }
 
-
-
-    const titleForm = useRef()
-    const order = useRef()
-    const pages = useRef()
+ 
 
 
     return (
@@ -49,7 +78,7 @@ export default function ChapterForm() {
                     <h1 className=' text-3xl text-center font-semibold'> New Chapter</h1>
                     <div className='flex flex-col mt-8 gap-4'>
                         <input ref={titleForm} className=" px-4 h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple  " type="text" name="titleForm" id="titleForm" placeholder="Title" required />
-                        <input ref={order} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple " type="text" name="order" id="order" placeholder="Order" required />
+                        <input ref={order} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple " type="number" name="order" id="order" placeholder="Order" required />
                         <input ref={pages} className=" px-4  h-[50px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple" type="text" name="pages" id="pages" placeholder="Pages" required />
                     </div>
                     <input className="mt-10 w-[250px] lg:w-[280px]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple" type="button" value="Send" onClick={captureData} />
