@@ -21,20 +21,23 @@ export default function MangaForm() {
   const inputDescription = useRef()
   const inputCoverPhoto = useRef()
 
-  function getFormData() {
-    let data = {
-      title: inputTitle.current.value,
-      category_id: inputCategories.current.value,
-      description: inputDescription.current.value,
-      cover_photo: inputCoverPhoto.current.value,
+  async function getFormData() {
+    try {
+      let data = {
+        title: inputTitle.current.value,
+        category_id: inputCategories.current.value,
+        description: inputDescription.current.value,
+        cover_photo: inputCoverPhoto.current.value,
+      }
+
+      let token = localStorage.getItem('token')
+      let headers = { headers: { 'Authorization': `Bearer ${token}` } }
+
+      let response = axios.post(apiUrl + "/mangas", data, headers()).then(() => navigate('/')).catch(err => alert(err))
+      console.log('response:', response);
+    } catch (error) {
+      console.log(error);
     }
-    alert(`
-      Sending Data 
-      title: ${data.title}
-      description: ${data.description}
-      cover_photo: ${data.cover_photo}
-      category_id: ${data.category_id}
-    `)
   }
 
   return (
