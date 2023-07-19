@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import CiaForm from './pages/CiaForm';
 import AuthorForm from './pages/AuthorForm';
 import Mangas from './pages/Mangas';
+import MangaDetail from './pages/MangaDetail';
 
 const router = createBrowserRouter([{
     path: '/', // con una ruta renderizo un componente de tipo layout
@@ -17,6 +18,7 @@ const router = createBrowserRouter([{
         { path: '/register', element: <Register />, loader: () => localStorage.getItem('user') && redirect('/') },
         { path: '/signin', element: <SignIn />, loader: () => localStorage.getItem('user') && redirect('/') },
         { path: '/manga-form', element: <MangaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 0 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
+        { path: 'manga/:page', element: <MangaDetail /> },
         { path: 'manga/:manga_id/chapter-form', element: <ChapterForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 0 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
         { path: '/cia-form', element: <CiaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 1 || JSON.parse(localStorage.getItem('user')).role === 2 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
         //Falta crear NotAllowed
