@@ -54,6 +54,7 @@ export default function NavBar() {
             setOptions([
               { to: "/", title: "Home" },
               { to: "/manga-form", title: "Create Manga" },
+              { to: '/manga/:manga_id/chapter-form', title: "New Chapter" },
               { to: "/", title: "Sign Out" }
             ])
           } else if (res.data.response.user.role === 3) {
