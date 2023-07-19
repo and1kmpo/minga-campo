@@ -15,7 +15,7 @@ const router = createBrowserRouter([{
         { path: '/register', element: <Register />, loader: () => localStorage.getItem('user') && redirect('/') },
         { path: '/signin', element: <SignIn />, loader: () => localStorage.getItem('user') && redirect('/') },
         { path: '/manga-form', element: <MangaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 0 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
-        { path: 'manga/:manga_id/chapter-form', element: <ChapterForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 0 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
+        { path: '/manga/:manga_id/chapter-form', element: <ChapterForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 0 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
         { path: '/cia-form', element: <CiaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 1 || JSON.parse(localStorage.getItem('user')).role === 2 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') },
         //Falta crear AuthorForm y NotAllowed
         { path: '/author-form', element: <CiaForm />, loader: () => (JSON.parse(localStorage.getItem('user')).role === 1 || JSON.parse(localStorage.getItem('user')).role === 2 || JSON.parse(localStorage.getItem('user')).role === 3) && redirect('/') }
