@@ -15,8 +15,9 @@ export default function ChapterForm() {
     const pages = useRef()
     const navigate = useNavigate()
 
-    if (rol()===0 || null) {
-        window.location.replace('/') }
+    if (rol() === 0 || null) {
+        window.location.replace('/')
+    }
 
     const captureData = () => {
         let dataForm = {
@@ -26,10 +27,11 @@ export default function ChapterForm() {
             manga_id
         }
         if (order.current.value) {
-            dataForm.order = order.current.value?.trim()}
-       
+            dataForm.order = order.current.value?.trim()
+        }
 
-            console.log(dataForm)
+
+        console.log(dataForm)
         let token = localStorage.getItem('token')
         let headers = { headers: { 'Authorization': `Bearer ${token}` } }
         axios.post(apiUrl + '/chapters', dataForm, headers)
@@ -37,37 +39,39 @@ export default function ChapterForm() {
                 icon: 'success',
                 text: 'chapter added!'
             }))
-            .then(()=>navigate('/'))
-        .catch(err=> {console.log(err.response)
-            Swal.fire({
-            icon: 'error',
-            html: err.response.data?.messages?.map(each=>`<p>${each}</p>`).join('')
-        })})
+            .then(() => navigate('/'))
+            .catch(err => {
+                console.log(err.response)
+                Swal.fire({
+                    icon: 'error',
+                    html: err.response.data?.messages?.map(each => `<p>${each}</p>`).join('')
+                })
+            })
 
-            // .catch((err) => {
-            //     if (err.response && err.response.data && err.response.data.message) {
-            //       Swal.fire({
-            //         icon: "error",
-            //         text: err.response.data.message,
-            //       });
-            //     } else {
-            //       Swal.fire({
-            //         icon: "error",
-            //         text: "Invalid Data",
-            //       })
-            //     }
-            //   })
-            // .catch(err => {
-            //     console.log(err.response)
-            //     Swal.fire({
-            //         icon: 'error',
-            //        text: 'Invalid Data'
-            //     })
-            //  })
-    
+        // .catch((err) => {
+        //     if (err.response && err.response.data && err.response.data.message) {
+        //       Swal.fire({
+        //         icon: "error",
+        //         text: err.response.data.message,
+        //       });
+        //     } else {
+        //       Swal.fire({
+        //         icon: "error",
+        //         text: "Invalid Data",
+        //       })
+        //     }
+        //   })
+        // .catch(err => {
+        //     console.log(err.response)
+        //     Swal.fire({
+        //         icon: 'error',
+        //        text: 'Invalid Data'
+        //     })
+        //  })
+
     }
 
- 
+
 
 
     return (
