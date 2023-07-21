@@ -31,11 +31,13 @@ export default function MangaDetail() {
                      alt="cover_photo"/>
                 <h1 className='text-[40px]'>{manga.title}</h1>
                 <div className="flex justify-between">
-                    <span className="text-[12px] rounded-xl py-2 px-4 bg-pink-200 text-pink-500">
-                        {manga.category_id.name}
+                    <span
+                        style={{color: manga.category_id?.color}}
+                        className="text-[12px] rounded-xl py-2 px-4">
+                        {manga.category_id?.name}
                     </span>
                     <span className="font-poppins text-[20px] text-[#9D9D9D]">
-                        {manga.author_id.name}
+                        {manga.author_id?.name}
                     </span>
                 </div>
             </div>
