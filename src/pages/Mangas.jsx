@@ -44,7 +44,7 @@ export default function Mangas() {
                 defaultValue={(store.mangas.text)} />
 
             <div className="flex items-center justify-center min-h-[400px]">
-                {notFound ? (<p className="w-100 text-center">No hay resultados que coincidan con la búsqueda</p>) : (mangas.map(each => <CardManga key={each._id} title={each.title} />))}
+                {notFound ? (<p className="w-100 text-center">No results found matching your search.</p>) : (mangas.map(each => <CardManga key={each._id} title={each.title} />))}
 
             </div>
             <div>
