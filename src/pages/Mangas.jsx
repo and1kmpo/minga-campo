@@ -15,21 +15,36 @@ export default function Mangas() {
     const [mangas, setMangas] = useState([])
     const [prev, setPrev] = useState(null)
     const [next, setNext] = useState(null)
+    const [notFound, setNotFound] = useState(false)
     useEffect(
         () => {
             axios(apiUrl + "/mangas?title=" + store.mangas.text, headers()).then(res => {
                 setMangas(res.data.response)
                 setPrev(res.data.prev_page)
                 setNext(res.data.next_page)
-            }).catch(err => console.error(err))
-        }, [store.mangas.text]
-    )
+                setNotFound(false)
+            }).catch((err) => {
+                if (err.response.status === 404) {
+                    setMangas([])
+                    setNotFound(true)
+                } else {
+                    console.error(err)
+                }
+            });
+        }, [store.mangas.text]);
+
     return (
         <>
             {/* <input type="text" placeholder="Search..." className="mt-[100px] ml-[100px]" onChange={(event) => setTitle(event.target.value)} /> Así se hace con estados locales*/}
-            <input type="text" placeholder="Search..." className="mt-[100px] ml-[100px]" onChange={(event) => dispatch(save_title({ title: event.target.value }))} defaultValue={(store.mangas.text)} />
-            <div className="flex">
-                {mangas.map(each => <CardManga key={each._id} title={each.title} />)}
+            <input
+                type="text"
+                placeholder="Search..."
+                className="mt-[100px] ml-[100px]"
+                onChange={(event) => dispatch(save_title({ title: event.target.value }))}
+                defaultValue={(store.mangas.text)} />
+
+            <div className="flex items-center justify-center min-h-[400px]">
+                {notFound ? (<p className="w-100 text-center">No hay resultados que coincidan con la búsqueda</p>) : (mangas.map(each => <CardManga key={each._id} title={each.title} />))}
 
             </div>
             <div>
