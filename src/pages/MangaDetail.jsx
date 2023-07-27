@@ -3,13 +3,16 @@ import { useParams } from 'react-router-dom'
 import axios from "axios"
 import apiUrl from "../apiUrl"
 import headers from "../utils/headers"
+import CardMangaChapter from "../components/CardMangaChapter"
 
 export default function MangaDetail() {
     let { manga_id, page } = useParams()
     let [ manga, setManga ] = useState("")
+    let [ chapters, setChapters ] = useState([])
+    let [ prev, setPrev ] = useState(null)
+    let [ next, setNext ] = useState(null)
     let [ openTab, setOpenTab ] = useState(1)
-    console.log("manga_id", manga_id)
-    console.log("page", page)
+    // console.log("manga_id", manga_id)
 
     useEffect(
         () => {
@@ -17,8 +20,25 @@ export default function MangaDetail() {
             axios(apiUrl+'/mangas/'+manga_id, headers())
                 .then( res => {
                     // datos dinamicos a renderizar
-                    console.log(res.data.response)
+                    // console.log(res.data.response)
                     setManga(res.data.response)
+                })
+                .catch(
+                    err => console.log(err)
+                )
+        },
+        []
+    )
+
+    useEffect(
+        () => {
+            // axios necesita la ruta del backend
+            axios(apiUrl+`/chapters?manga_id=${manga_id}`, headers())
+                .then( res => {
+                        console.log(res.data)
+                        setChapters(res.data.response)
+                        setPrev(res.data.prev_page)
+                        setNext(res.data.next_page)
                 })
                 .catch(
                     err => console.log(err)
@@ -30,29 +50,32 @@ export default function MangaDetail() {
     return (
         <div className='flex flex-col gap-6 font-poppins pt-[77px] pb-[30px] bg-[#EBEBEB]'>
 
-            <div id="div-title" className="flex flex-col px-4">
-                <img className="rounded-xl h-[40vh] object-cover object-top"
+            <div id="div-title" className="flex flex-col items-center px-4 pt-2">
+                <img className="rounded-xl h-[40vh] lg:h-[60vh] object-cover object-top"
                      src={manga.cover_photo}
                      alt="cover_photo"/>
-                <h1 className='text-[40px]'>{manga.title}</h1>
-                <div className="flex justify-between">
-                    <span style={{color: manga.category_id?.color}} className="capitalize text-[12px] rounded-xl py-2 px-4">
+                <h1 className={'text-[40px] font-normal ' + (openTab === 1 ? "block" : "hidden")}>{manga.title}</h1>
+                <div className={"flex justify-between " + (openTab === 1 ? "block" : "hidden")}>
+                    <span style={{color: manga.category_id?.color}} className="capitalize text-[12px] font-medium rounded-xl py-2 px-4">
                         {manga.category_id?.name}
                     </span>
-                    <span className="font-poppins capitalize text-[20px] text-[#9D9D9D]">
+                    <span className="font-poppins capitalize text-[20px] font-medium text-[#9D9D9D]">
                         {manga.author_id?.name}
                     </span>
                 </div>
+                <div className={openTab === 2 ? "block" : "hidden"}>
+                    <h1 className="text-[20px] font-normal pt-4">Chapters</h1>
+                </div>
             </div>
 
-            <div id="div-emojis" className="flex justify-center mt-2 gap-2">
+            <div id="div-emojis" className={"flex justify-center gap-2 " + (openTab === 1 ? "block" : "hidden")}>
                 <img src="/assets/like.png" alt="emoji like"/>
                 <img src="/assets/unlike.png" alt="emoji unlike"/>
                 <img src="/assets/surprise.png" alt="emoji surprise"/>
                 <img src="/assets/eyes_love.png" alt="emoji love"/>
             </div>
 
-            <div id="div-score" className="flex justify-center">
+            <div id="div-score" className={"flex justify-center " + (openTab === 1 ? "block" : "hidden")}>
                 <div className="w-min flex justify-center divide-x divide-[#9D9D9D] rounded-xl bg-white shadow-[0px_0px_7px_2px_rgba(0,0,0,0.15)]">
                     <div className="text-center py-2 px-8">
                         <h1 className="text-[24px]">4.5</h1>
@@ -95,19 +118,17 @@ export default function MangaDetail() {
 
                 <div id="t_containers" className="relative flex flex-col break-words w-full">
                     <div className="">
+
                         <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Suspendisse molestie est nec gravida dictum. Nunc dictum
-                                lectus quam, non maximus urna ornare sit amet. Aliquam id
-                                sapien in massa commodo volutpat vel vitae quam.Nunc dictum
-                                lectus quam, non maximus urna ornare sit amet. Aliquam id
-                                sapien in massa commodo volutpatc tum lectus quam, non ma.
-                            </p>
+                            <p> {manga.description} </p>
                         </div>
-                        <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                            <p> C Chapters
-                            </p>
+
+                        <div className={"flex flex-col gap-10 pt-4 " + (openTab === 2 ? "block" : "hidden")} id="link2">
+                            {chapters.map(each =>
+                                <CardMangaChapter key={each.title} title={each.title} cover_photo={each.cover_photo} pages={each.pages.length} />
+                            )}
                         </div>
+
                     </div>
                 </div>
             </div>
