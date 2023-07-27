@@ -49,16 +49,6 @@ export default function Mangas() {
             });
         }, []);
 
-    const handleCategoryChange = (event) => {
-        const categoryId = event.target.name;
-        setSelectedCategories((prevSelected) => {
-            if (prevSelected.includes(categoryId)) {
-                return prevSelected.filter((id) => id !== categoryId);
-            } else {
-                return [...prevSelected, categoryId];
-            }
-        });
-    };
     return (
         <>
 
