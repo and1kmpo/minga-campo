@@ -51,15 +51,15 @@ export default function MangaDetail() {
         <div className='flex flex-col gap-6 font-poppins pt-[77px] pb-[30px] bg-[#EBEBEB]'>
 
             <div id="div-title" className="flex flex-col items-center px-4 pt-2">
-                <img className="rounded-xl h-[40vh] lg:h-[60vh] object-cover object-top"
+                <img className="rounded-xl w-full h-[40vh] lg:h-[60vh] object-cover object-top"
                      src={manga.cover_photo}
                      alt="cover_photo"/>
                 <h1 className={'text-[40px] font-normal ' + (openTab === 1 ? "block" : "hidden")}>{manga.title}</h1>
-                <div className={"flex justify-between " + (openTab === 1 ? "block" : "hidden")}>
+                <div className={"w-full flex justify-between " + (openTab === 1 ? "block" : "hidden")}>
                     <span style={{color: manga.category_id?.color}} className="capitalize text-[12px] font-medium rounded-xl py-2 px-4">
                         {manga.category_id?.name}
                     </span>
-                    <span className="font-poppins capitalize text-[20px] font-medium text-[#9D9D9D]">
+                    <span className="font-poppins capitalize text-[20px] px-4 font-medium text-[#9D9D9D]">
                         {manga.author_id?.name}
                     </span>
                 </div>
@@ -68,33 +68,40 @@ export default function MangaDetail() {
                 </div>
             </div>
 
-            <div id="div-emojis" className={"flex justify-center gap-2 " + (openTab === 1 ? "block" : "hidden")}>
-                <img src="/assets/like.png" alt="emoji like"/>
-                <img src="/assets/unlike.png" alt="emoji unlike"/>
-                <img src="/assets/surprise.png" alt="emoji surprise"/>
-                <img src="/assets/eyes_love.png" alt="emoji love"/>
-            </div>
+            <div className="flex flex-col gap-4 lg:flex-row lg:justify-around">
+                <div id="div-emojis" className={"flex justify-center gap-2 " + (openTab === 1 ? "block" : "hidden")}>
+                    <img src="/assets/like.png" alt="emoji like"/>
+                    <img src="/assets/unlike.png" alt="emoji unlike"/>
+                    <img src="/assets/surprise.png" alt="emoji surprise"/>
+                    <img src="/assets/eyes_love.png" alt="emoji love"/>
+                </div>
 
-            <div id="div-score" className={"flex justify-center " + (openTab === 1 ? "block" : "hidden")}>
-                <div className="w-min flex justify-center divide-x divide-[#9D9D9D] rounded-xl bg-white shadow-[0px_0px_7px_2px_rgba(0,0,0,0.15)]">
-                    <div className="text-center py-2 px-8">
-                        <h1 className="text-[24px]">4.5</h1>
-                        <h3 className="text-[12px] text-[#9D9D9D]">Rating</h3>
-                    </div>
-                    <div className="text-center py-2 px-8">
-                        <h1 className="text-[24px]">265</h1>
-                        <h3 className="text-[12px] text-[#9D9D9D]">Chapters</h3>
-                    </div>
-                    <div className="text-center py-2 px-8">
-                        <h1 className="text-[24px]">Eng</h1>
-                        <h3 className="text-[12px] text-[#9D9D9D]">Languaje</h3>
+                <div id="div-score" className={"flex flex-col items-center " + (openTab === 1 ? "block" : "hidden")}>
+                    <div className="w-min flex justify-center rounded-xl relative bg-white shadow-[0px_0px_7px_2px_rgba(0,0,0,0.15)]">
+                        <div className="text-center py-2 px-8">
+                            <h1 className="text-[24px]">4.5</h1>
+                            <h3 className="text-[12px] text-[#9D9D9D]">Rating</h3>
+                        </div>
+                        <div className="text-center py-2 px-8">
+                            <h1 className="text-[24px]">265</h1>
+                            <h3 className="text-[12px] text-[#9D9D9D]">Chapters</h3>
+                        </div>
+                        <div className="text-center py-2 px-8">
+                            <h1 className="text-[24px]">Eng</h1>
+                            <h3 className="text-[12px] text-[#9D9D9D]">Languaje</h3>
+                        </div>
+                        <div className="w-full grid grid-cols-3 divide-x divide-[#9D9D9D] absolute top-[25px]">
+                            <div className="w-1/3 h-6"></div>
+                            <div className="w-1/3 h-6"></div>
+                            <div className="w-1/3 h-6"></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div id="tabs" className="px-4">
                 <div id="t_names" className="flex flex-wrap mb-6 list-none border rounded-full shadow-[0px_0px_7px_2px_rgba(0,0,0,0.15)]">
-                    <a  className={'w-1/2 rounded-full py-2 flex justify-center items-center '+
+                    <a  className={'w-1/2 rounded-full py-2 lg:py-4 flex justify-center items-center '+
                                     (openTab === 1
                                         ? "text-white bg-indigo-700"
                                         : "text-[#9D9D9D] bg-transparent")}
@@ -104,7 +111,7 @@ export default function MangaDetail() {
                         }} href="#link1">
                         Manga
                     </a>
-                    <a  className={"w-1/2 rounded-full py-2 flex justify-center items-center "+
+                    <a  className={"w-1/2 rounded-full py-2 lg:py-4 flex justify-center items-center "+
                                     (openTab === 2
                                         ? "text-white bg-indigo-700"
                                         : "text-[#9D9D9D] bg-transparent")}
@@ -116,7 +123,7 @@ export default function MangaDetail() {
                     </a>
                 </div>
 
-                <div id="t_containers" className="relative flex flex-col break-words w-full">
+                <div id="t_containers" className="flex flex-col break-words w-full">
                     <div className="">
 
                         <div className={openTab === 1 ? "block" : "hidden"} id="link1">
