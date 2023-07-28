@@ -134,6 +134,12 @@ export default function MangaDetail() {
                             {chapters.map(each =>
                                 <CardMangaChapter key={each.title} title={each.title} cover_photo={each.cover_photo} pages={each.pages.length} />
                             )}
+                            <div className="flex flex-col items-center text-[12px] font-semibold">
+                                <div className="flex divide-x text-slate-700 divide-slate-400 border shadow rounded-md bg-white p-1">
+                                    <div className="w-[50px] text-center">Prev</div>
+                                    <div className="w-[50px] text-center">Next</div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
