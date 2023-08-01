@@ -4,14 +4,18 @@ import apiUrl from "../apiUrl";
 import headers from "../utils/headers";
 
 export default function AuthorMangas() {
-  const [newsMangasData, cardsMangasData] = useState([]);
+  const [newsMangasData, newMangasData] = useState([]);
+  const [oldsMangasData, oldMangasData] = useState([]);
+  const [viewMangaData, viewMangasData] = useState(false);
 
   useEffect(() => {
     axios
       .get(apiUrl + "/mangas/news", headers())
       .then((res) => {
-        console.log('mangas news:',res.data.response);
-       cardsMangasData(res);
+        console.log("mangas news:", res.data.response);
+        newMangasData(res.data.response.news);
+        oldMangasData(res.data.response.old);
+        console.log("default:", viewMangaData);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);
@@ -20,15 +24,26 @@ export default function AuthorMangas() {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mx-auto">
         {newsMangasData.map((card) => (
-          <div key={card} className="bg-white shadow rounded-lg p-4">
+          <div key={card} className="rounded-lg p-4">
             <img
-              src={card.imageUrl}
-              alt={`Imagen ${card}`}
-              className="w-full h-40 object-cover mb-4 rounded-lg"
+              src={card.cover_photo}
+              alt={`Imagen ${card.cover_photo}`}
+              className="w-full h-40 object-fit mb-4 rounded-lg"
             />
-            <p className="text-lg font-semibold">{card}</p>
+            <p className="text-lg font-semibold">{card.title}</p>
+          </div>
+        ))}
+
+        {oldsMangasData.map((card) => (
+          <div key={card} className="rounded-lg p-4">
+            <img
+              src={card.cover_photo}
+              alt={`Imagen ${card.cover_photo}`}
+              className="w-full h-40 object-fit mb-4 rounded-lg"
+            />
+            <p className="text-lg font-semibold">{card.title}</p>
           </div>
         ))}
       </div>

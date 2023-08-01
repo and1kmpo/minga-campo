@@ -2,23 +2,33 @@
 import React, { useEffect, useState } from "react";
 import AuthorMangas from "../components/AuthorMangas";
 import { RiEditBoxLine } from "react-icons/ri";
-import { RiToggleFill } from "react-icons/ri";
-import { RiToggleLine } from "react-icons/ri";
 import axios from "axios";
 import apiUrl from "../apiUrl";
 import headers from "../utils/headers";
+import SwitchMangas from "../components/SwitchMangas";
 
 export default function Author() {
   const [profileData, setprofileData] = useState([]);
+  const [viewMangaData, viewMangasData] = useState([]);
 
-  let token = localStorage.getItem("token");
-  let headers = { headers: { Authorization: `Bearer ${token}` } };
   useEffect(() => {
     axios
-      .get(apiUrl + "/authors/me", headers)
+      .get(apiUrl + "/authors/me", headers())
       .then((res) => {
         console.log(res.data.response.profile);
         setprofileData(res.data.response.profile);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos de la API:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(apiUrl + "/mangas/news", headers())
+      .then((res) => {
+        viewMangasData(res);
+        console.log("default:", res.data.response.logo);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);
@@ -46,11 +56,7 @@ export default function Author() {
           <RiEditBoxLine className="mt-7 mx-2" />
         </div>
         <hr className="m-1 w-3/5 border mx-auto border-black bg-black" />
-        <div className="flex justify-center me-auto mx-auto">
-          <div className="mr-10 text-gray-600">new</div>
-          <RiToggleFill className="text-3xl text-[#12B28C]"></RiToggleFill>
-          <div className="mx-10 text-gray-600">old</div>
-        </div>
+        <SwitchMangas></SwitchMangas>
         <AuthorMangas />
       </div>
     </>

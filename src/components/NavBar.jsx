@@ -52,6 +52,7 @@ export default function NavBar() {
           ) {
             setOptions([
               { to: "/", title: "Home" },
+              { to: "/me", title: "Profile" },
               { to: "/mangas/1", title: "Mangas" },
               { to: "/manga-form", title: "Create Manga" },
               { to: "/manga/:manga_id/chapter-form", title: "New Chapter" },
