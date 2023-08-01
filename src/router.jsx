@@ -9,8 +9,10 @@ import CiaForm from './pages/CiaForm';
 import AuthorForm from './pages/AuthorForm';
 import Mangas from './pages/Mangas';
 import MangaDetail from './pages/MangaDetail';
-import Author from './pages/Author';
 import Chapters from './pages/chapters';
+import NotAllowed from './pages/NotAllowed';
+import Author from './pages/Author';
+
 
 
 const router = createBrowserRouter([
@@ -59,6 +61,11 @@ const router = createBrowserRouter([
       },
       //Falta configurar NotAllow
       {
+        path: '/NotAllowed', element: <NotAllowed />, loader: () => !localStorage.getItem('user') ||
+          [0, 1, 2, 3].includes(JSON.parse(localStorage.getItem('user')).role) && redirect('/NotAllowed')
+      },
+ 
+      {
         path: "/author-form",
         element: <AuthorForm />,
         loader: () =>
@@ -81,5 +88,5 @@ const router = createBrowserRouter([
     ],
   }
 ])
-
 export default router;
+

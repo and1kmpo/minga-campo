@@ -26,7 +26,7 @@ export default function ChapterForm() {
             order: order.current.value?.trim(),
             pages: pages.current.value.split(','),
             manga_id
-        }
+      
      
         console.log(dataForm)
       
@@ -39,7 +39,6 @@ export default function ChapterForm() {
             }))
             .then(() => navigate('/'))
             .catch(err => {
-                console.log(err.response)
                 Swal.fire({
                     icon: 'error',
                     html: err.response.data?.messages?.map(each => `<p>${each}</p>`).join('')

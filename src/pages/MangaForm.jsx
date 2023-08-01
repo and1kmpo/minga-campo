@@ -62,6 +62,7 @@ export default function MangaForm() {
     <>
       <div className="flex w-full h-screen items-center justify-between overflow-x-hidden mb-6   ">
         <div className="grid gap-5 my-32 mb-6 flex-col mt-[10%]  lg:mt-[5%] justify-center items-center  w-screen lg:w-[50%] lg:left-[50%] ">
+        <h1 className=' text-3xl text-center font-semibold'> New Manga</h1>
           <div className="">
             <input
               type="text"
