@@ -22,17 +22,21 @@ export default function MangaDetail() {
 
     useEffect(
         () => {
-            // axios necesita la ruta del backend
-            axios(apiUrl+'/mangas/'+manga_id, headers())
+            if (manga._id !== manga_id) {
+            // if (!manga) { // este condicional funciona pero cuando cambie de manga no se volverá a re fetchear el nuevo manga
+                // axios necesita la ruta del backend
+                axios(apiUrl+'/mangas/'+manga_id, headers())
                 .then( res => {
                     // datos dinamicos a renderizar
                     // asi se guarda con estados locales
                     // setManga(res.data.response)
+                    console.log(res.data.response)
                     dispatch(save_manga({manga: res.data.response}))
                 })
                 .catch(
                     err => console.log(err)
                 )
+            }
         },
         []
     )
