@@ -3,12 +3,12 @@ import axios from "axios";
 import apiUrl from "../apiUrl";
 import headers from "../utils/headers";
 import CardManga from "../components/CardManga";
-import Category from "../components/CategoryMangas";
+// import Category from "../components/CategoryMangas";
 import { useSelector, useDispatch } from "react-redux";
-import manga_action from "../store/actions/mangas";
-const { save_title, save_category } = manga_action;
-import backgroundMangas from "../assets/backgroundMangas.png";
-import { SearchIcon } from '@heroicons/react/outline';
+// import manga_action from "../store/actions/mangas";
+// const { save_title, save_category } = manga_action;
+// import backgroundMangas from "../assets/backgroundMangas.png";
+// import { SearchIcon } from '@heroicons/react/outline';
 
 export default function Mangas() {
     const store = useSelector((store) => store);
