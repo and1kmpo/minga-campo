@@ -1,15 +1,16 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
-import Main from "./layouts/Main";
-import Index from "./pages/Index";
-import MangaForm from "./pages/MangaForm";
-import ChapterForm from "./pages/ChapterForm";
-import SignIn from "./pages/Signin";
-import Register from "./pages/Register";
-import CiaForm from "./pages/CiaForm";
-import AuthorForm from "./pages/AuthorForm";
-import Mangas from "./pages/Mangas";
-import MangaDetail from "./pages/MangaDetail";
-import Chapters from "./pages/chapters";
+import { createBrowserRouter, redirect } from 'react-router-dom';
+import Main from './layouts/Main';
+import Index from './pages/Index';
+import MangaForm from './pages/MangaForm';
+import ChapterForm from './pages/ChapterForm';
+import SignIn from './pages/Signin';
+import Register from './pages/Register';
+import CiaForm from './pages/CiaForm';
+import AuthorForm from './pages/AuthorForm';
+import Mangas from './pages/Mangas';
+import MangaDetail from './pages/MangaDetail';
+import Author from './pages/Author';
+import Chapters from './pages/chapters';
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
             JSON.parse(localStorage.getItem("user")).role === 3) &&
           redirect("/"),
       },
+      { path: '/me', element: <Author></Author>},
       { path: "/mangas/:page", element: <Mangas /> },
       { path: "/mangas/:page", element: <Mangas /> },
       {
