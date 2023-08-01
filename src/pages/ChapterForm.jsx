@@ -14,30 +14,28 @@ export default function ChapterForm() {
     const order = useRef()
     const pages = useRef()
     const navigate = useNavigate()
+    let token = localStorage.getItem('token')
+    let headers = { headers: { 'Authorization': `Bearer ${token}` } }
 
     if (rol() === 0 || null) {
-        window.location.replace('/')
+        window.location.replace('/NotAllowed')
     }
-
     const captureData = () => {
         let dataForm = {
             title: titleForm.current.value,
-            order: order.current.value,
+            order: order.current.value?.trim(),
             pages: pages.current.value.split(','),
             manga_id
         }
-        if (order.current.value) {
-            dataForm.order = order.current.value?.trim()
-        }
-
-
+     
         console.log(dataForm)
-        let token = localStorage.getItem('token')
-        let headers = { headers: { 'Authorization': `Bearer ${token}` } }
+      
         axios.post(apiUrl + '/chapters', dataForm, headers)
             .then((res) => Swal.fire({
                 icon: 'success',
-                text: 'chapter added!'
+                text: 'chapter added!',
+                confirmButtonColor: "purple"
+    
             }))
             .then(() => navigate('/'))
             .catch(err => {
@@ -47,33 +45,7 @@ export default function ChapterForm() {
                     html: err.response.data?.messages?.map(each => `<p>${each}</p>`).join('')
                 })
             })
-
-        // .catch((err) => {
-        //     if (err.response && err.response.data && err.response.data.message) {
-        //       Swal.fire({
-        //         icon: "error",
-        //         text: err.response.data.message,
-        //       });
-        //     } else {
-        //       Swal.fire({
-        //         icon: "error",
-        //         text: "Invalid Data",
-        //       })
-        //     }
-        //   })
-        // .catch(err => {
-        //     console.log(err.response)
-        //     Swal.fire({
-        //         icon: 'error',
-        //        text: 'Invalid Data'
-        //     })
-        //  })
-
     }
-
-
-
-
     return (
         <>
             <main className=' flex w-full h-screen items-center justify-between overflow-x-hidden mb-6  '>
