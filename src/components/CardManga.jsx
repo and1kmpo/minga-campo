@@ -1,5 +1,4 @@
 export default function CardManga({ title, category, imageSrc, color }) {
-    console.log('Category color:', color);
     return (
         <div className="w-[300px] h-[150px] flex items-center m-10 rounded-xl border-l-8" style={{ backgroundColor: color }}>
             <div className="flex flex-col p-4" >
