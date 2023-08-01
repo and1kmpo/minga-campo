@@ -26,7 +26,9 @@ export default function ChapterForm() {
             order: order.current.value?.trim(),
             pages: pages.current.value.split(','),
             manga_id
-        }
+      
+     
+        console.log(dataForm)
       
         axios.post(apiUrl + '/chapters', dataForm, headers)
             .then((res) => Swal.fire({
