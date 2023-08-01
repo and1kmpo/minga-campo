@@ -22,7 +22,7 @@ export default function MangaDetail() {
 
     useEffect(
         () => {
-            if (manga._id !== manga_id) {
+            if (manga?._id !== manga_id) {
             // if (!manga) { // este condicional funciona pero cuando cambie de manga no se volverá a re fetchear el nuevo manga
                 // axios necesita la ruta del backend
                 axios(apiUrl+'/mangas/'+manga_id, headers())
