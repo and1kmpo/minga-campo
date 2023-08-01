@@ -7,7 +7,6 @@ const initialState = {
     order: 0,
     id:""
 }
-
 const chapter_reducer = createReducer(
     initialState,
     (builder) => builder.addCase(
@@ -22,5 +21,5 @@ const chapter_reducer = createReducer(
         }
     )
 )
-
 export default chapter_reducer
+

@@ -1,9 +1,11 @@
+
 // import Welcome from "../components/Welcome"
 import { Link as Anchor } from 'react-router-dom'
 import React from "react";
 
 
 export default function NotAllowed() {
+
 
     return (
          

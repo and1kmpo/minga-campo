@@ -8,13 +8,12 @@ const save_data = createAction(
                 order: obj.order,
                 title: obj.title,
                 id:obj._id
+
             }
         }
     }
 )
-
 const chapter_actions = {
     save_data
 }
-
 export default chapter_actions

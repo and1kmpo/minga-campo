@@ -12,10 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import chapter_actions from "../store/actions/chapters";
 
 
+
+
 export default function chapters() {
     const d_left = "M9 9l-6 6m0 0l6 6m-6-6h18";
     const d_right = "M15 15l6-6m0 0l-6-6m6 6h-18";
-        let { id, page } = useParams()
+    let { id, page } = useParams()
     const navigate = useNavigate()
     let token = localStorage.getItem('token')
     let headers = { headers: { 'Authorization': `Bearer ${token}` } }
@@ -29,8 +31,6 @@ export default function chapters() {
     const userRole = rol();
 // console.log(store.chapter)
 
-
-
     if (rol() === 0 || rol()===null) {
         window.location.replace('/')
     }
@@ -39,7 +39,7 @@ export default function chapters() {
     useEffect(() => {
         if (userRole === 0 || userRole === null){
             navigate('/NotAllowed')
-        } else {
+        } else {    
             axios(apiUrl + `/chapters/${id}`, headers)
                 .then(res => {
                     // console.log(res)
@@ -50,14 +50,14 @@ export default function chapters() {
                         {
                             title: res.data.response.title,
                             order: res.data.response.order,
-                            id: res.data.response._id
-                            
-                        })
+                            id: res.data.response._id                            
+                       })
                     )
                 })
                 .catch(err => console.log(err))
         }
     },        [nextPage, prevPage, id ]
+                   
     )
     const next = () => {
         if (currentPage !== pages.length - 1) {
@@ -68,9 +68,7 @@ export default function chapters() {
             navigate("/chapter/" + nextPage + "/1")
         }
         console.log(currentPage)
-       
-    }
-
+           }
   
 const prev = () => {
     if (currentPage !== 0) {
@@ -84,17 +82,15 @@ const prev = () => {
     }
     console.log(currentPage)
   };
-        
-
+       
     useEffect(() => {
 
       }, [nextPage, prevPage, currentPage]);
-
-    return (
+      return (
         <>
             {/* < Comments_ch /> */}
 
-            
+          
                
             <div className="flex flex-col justify-between items-center h-screen ">
             <Nav_2/>                  
@@ -116,9 +112,8 @@ const prev = () => {
 
                     </div> 
                 </div>
+                       </div>
 
-            
-                </div>
         </>
     )
 }
