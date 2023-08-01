@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@mui/icons-material": "^5.11.16",
     "@reduxjs/toolkit": "^1.9.5",
     "@tailwindcss/typography": "^0.5.9",
@@ -17,8 +18,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-loader-spinner": "^5.3.4",
+    "react-loading": "^2.0.3",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.13.0",
+    "redux-devtools-extension": "^2.13.9",
     "sweetalert2": "^11.7.12",
     "typeface-roboto": "^1.1.13"
   },

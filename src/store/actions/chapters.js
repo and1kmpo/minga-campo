@@ -6,14 +6,14 @@ const save_data = createAction(
         return {
             payload: {
                 order: obj.order,
-                title: obj.title 
+                title: obj.title,
+                id:obj._id
+
             }
         }
     }
 )
-
-const chapterActions = {
+const chapter_actions = {
     save_data
 }
-
-export default chapterActions
+export default chapter_actions

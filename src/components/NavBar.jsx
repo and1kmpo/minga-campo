@@ -55,10 +55,11 @@ export default function NavBar() {
               { to: "/me", title: "Profile" },
               { to: "/mangas/1", title: "Mangas" },
               { to: "/manga-form", title: "Create Manga" },
-              { to: "/manga/:manga_id/chapter-form", title: "New Chapter" },
-              { to: "/chapter/:id/:page", title: "Chapters" },
-              { to: "/", title: "Sign Out" },
-            ]);
+              { to: '/manga/:manga_id/chapter-form', title: "New Chapter" },
+              // {to: '/chapter/:id/:page', title: "Chapters" },
+              { to: "/", title: "Sign Out" }
+            ])
+            
           } else if (res.data.response.user.role === 3) {
             setOptions([
               { to: "/", title: "Home" },
