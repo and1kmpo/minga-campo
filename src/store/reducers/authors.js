@@ -1,14 +1,14 @@
 import { createReducer } from "@reduxjs/toolkit";
 import authorsActions from "../actions/authors";
 
-const { saveData } = authorsActions;
+const { saveProfile } = authorsActions;
 
 const initialState = {
   profile: {},
 };
 
-const authorReducer = createReducer(initialStatem, (builder) =>
-  builder.addCase(saveData, (state, action) => {
+const authorReducer = createReducer(initialState, (builder) =>
+  builder.addCase(saveProfile, (state, action) => {
     let newState = {
       ...state,
       profile: action.payload.profile,

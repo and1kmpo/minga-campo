@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-let saveProfile = createAction("saveData", (obj) => {
+let saveProfile = createAction("saveProfile", (obj) => {
   return {
     payload: {
       profile: obj.profile,
@@ -9,7 +9,7 @@ let saveProfile = createAction("saveData", (obj) => {
 });
 
 const authorsActions = {
-  saveProfile,
+  saveProfile
 };
 
 export default authorsActions;
