@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from "axios"
 import apiUrl from "../apiUrl"
@@ -44,7 +44,7 @@ export default function MangaDetail() {
     useEffect(
         () => {
             // axios necesita la ruta del backend
-            axios(apiUrl+`/chapters?manga_id=${manga_id}`, headers())
+            axios(apiUrl+`/chapters?manga_id=${manga_id}&page=${page}`, headers())
                 .then( res => {
                         setChapters(res.data.response)
                         setPrev(res.data.prev_page)
@@ -54,8 +54,13 @@ export default function MangaDetail() {
                     err => console.log(err)
                 )
         },
-        []
+        [page]
     )
+
+    let navigate = useNavigate();
+    const link_page = (page) => {
+        navigate(`/manga/${manga_id}/${page}`);
+    }
 
     return (
         <div className='flex flex-col gap-6 font-poppins pt-[77px] pb-[30px] bg-[#EBEBEB]'>
@@ -145,9 +150,9 @@ export default function MangaDetail() {
                                 <CardMangaChapter key={each._id} _id={each._id} title={each.title} cover_photo={each.cover_photo} pages={each.pages.length} />
                             )}
                             <div className="flex flex-col items-center text-[12px] font-semibold">
-                                <div className="flex divide-x text-slate-700 divide-slate-400 border shadow rounded-md bg-white p-1">
-                                    { prev && <input type="button" value={"Prev"} /> }
-                                    { next && <input type="button" value={"Next"} /> }
+                                <div className="flex">
+                                    { prev && <button className='p-2 rounded-l-lg font-bold text-white bg-gradient-to-r from-indigo-700 to-indigo-500' value={prev} onClick={(e) => { link_page(e.target.value) }}>Prev</button>}
+                                    { next && <button className='p-2 rounded-r-lg font-bold text-white bg-gradient-to-r from-indigo-500 to-indigo-700' value={next} onClick={(e) => { link_page(e.target.value) }}>Next</button>}
                                 </div>
                             </div>
                         </div>
