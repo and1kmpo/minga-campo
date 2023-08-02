@@ -1,4 +1,6 @@
-export default function CardMangaChapter({ title, cover_photo, pages }) {
+import { Link as Anchor } from 'react-router-dom';
+
+export default function CardMangaChapter({ _id, title, cover_photo, pages }) {
   return (
     <div className="flex justify-between items-center">
         <div className="flex gap-4">
@@ -15,9 +17,7 @@ export default function CardMangaChapter({ title, cover_photo, pages }) {
                 </div>
             </div>
         </div>
-        <button className="w-[140px] h-[74px] rounded-full font-bold text-[24px] text-white bg-gradient-to-r from-indigo-700 to-indigo-500" type="submit">
-            Read
-        </button>
+        <Anchor to={'/chapter/' + _id + '/1'} className='w-[140px] h-[74px] flex justify-center items-center rounded-full font-bold text-[24px] text-white bg-gradient-to-r from-indigo-700 to-indigo-500'>Read</Anchor>
     </div>
   )
 }

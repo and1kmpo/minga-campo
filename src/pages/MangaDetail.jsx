@@ -142,7 +142,7 @@ export default function MangaDetail() {
 
                         <div className={"flex flex-col gap-10 pt-4 " + (openTab === 2 ? "block" : "hidden")} id="link2">
                             {chapters.map(each =>
-                                <CardMangaChapter key={each.title} title={each.title} cover_photo={each.cover_photo} pages={each.pages.length} />
+                                <CardMangaChapter key={each._id} _id={each._id} title={each.title} cover_photo={each.cover_photo} pages={each.pages.length} />
                             )}
                             <div className="flex flex-col items-center text-[12px] font-semibold">
                                 <div className="flex divide-x text-slate-700 divide-slate-400 border shadow rounded-md bg-white p-1">
