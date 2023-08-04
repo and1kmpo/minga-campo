@@ -30,8 +30,8 @@ export default function Carousel() {
       <div className="h-[180px] xl:h-[265px] w-full rounded-md flex items-center"
            style={{ backgroundColor: categories[counter]?.color }}>
 
-        <div className="pl-6">
-          <Arrow d={d_left} onClick={prev} />
+        <div className="pl-6" onClick={prev}>
+          <Arrow d={d_left} />
         </div>
 
         <div className="w-[50%] h-full flex justify-evenly">
@@ -55,8 +55,8 @@ export default function Carousel() {
           </p>
         </div>
 
-        <div className="pr-6">
-          <Arrow d={d_right} onClick={next} />
+        <div className="pr-6" onClick={next}>
+          <Arrow d={d_right} />
         </div>
 
       </div>
