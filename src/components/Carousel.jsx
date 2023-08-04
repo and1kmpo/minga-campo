@@ -26,39 +26,39 @@ export default function Carousel() {
     counter !== 0 ? modify(counter - 1) : modify(categories.length - 1);
 
   return (
-    <div className="flex justify-between  hidden md:block mb-10  ">
-      <div
-        className="h-[265px]  rounded-md flex items-center relative ml-10 mr-10 mt-10"
-        style={{ backgroundColor: categories[counter]?.color }}
-      >
-        <div className="ml-0 md_ml-4 ">
+    <div className="hidden lg:flex px-12 py-8">
+      <div className="h-[180px] xl:h-[265px] w-full rounded-md flex items-center"
+           style={{ backgroundColor: categories[counter]?.color }}>
+
+        <div className="pl-6">
           <Arrow d={d_left} onClick={prev} />
         </div>
-        <img
-          className=" ml-[8%] h-[100%] w-[15%] absolute"
-          src={categories[counter]?.character_photo}
-          alt="imagen1"
-        ></img>
-        <img
-          className=" ml-[28%] lg:ml-[30%] -mt-[40px] h-[284px] w-[189px] absolute"
-          src={categories[counter]?.cover_photo}
-          alt="imagen2"
-        ></img>
 
-        <div className="flex flex-col item-start justify-center w-[40%] lg:w-[45%] h-auto  text-gray-100 absolute ml-[49%]">
-          <h3 className="font-Roboto font-bold text-2xl xl:text-3xl ">
+        <div className="w-[50%] h-full flex justify-evenly">
+          <img
+            className="w-[187px] xl:w-[276px] h-[208px] xl:h-[306px] self-end"
+            src={categories[counter]?.character_photo}
+            alt="character"></img>
+          <img
+            className="w-[122px] xl:w-[180px] h-[183px] xl:h-[270px] -mt-[40px]"
+            src={categories[counter]?.cover_photo}
+            alt="cover"></img>
+        </div>
+
+        <div className="w-[50%] flex flex-col justify-center font-Roboto pl-24 pr-40"
+             style={{ color: categories[counter]?.hover }}>
+          <h3 className="text-[24px] font-medium">
             {categories[counter]?.name.toUpperCase()}
           </h3>
-          <p
-            className="text-[20px] font-Roboto text-sm xl:text-xl font-normal "
-            style={{ color: categories[counter]?.hover }}
-          >
+          <p className="text-[14px] font-normal leading-[13.33px]">
             {categories[counter]?.description}
           </p>
         </div>
-        <div className="flex justify-between ml-[89%]">
+
+        <div className="pr-6">
           <Arrow d={d_right} onClick={next} />
         </div>
+
       </div>
     </div>
   );
