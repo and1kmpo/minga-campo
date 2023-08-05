@@ -1,5 +1,5 @@
 import { RiCloseFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import apiURL from "../apiUrl";
@@ -31,6 +31,8 @@ export default function NavBar() {
   const [options, setOptions] = useState([{ to: "/", title: "Home" }]);
   const [photo, setPhoto] = useState();
   const [email, setEmail] = useState();
+  const location = useLocation();
+  const isChapters = location.pathname.startsWith("/chapter/")
   useEffect(() => {
     let token = localStorage.getItem("token");
     //console.log(token);
@@ -86,24 +88,24 @@ export default function NavBar() {
               width="55"
               height="55"
               viewBox="0 0 55 55"
-              fill="none"
+              fill={isChapters ? "#FFFFFF" : "#4338CA"}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M11 16H37"
-                stroke="#4338CA"
+                stroke={isChapters ? "#FFFFFF" : "#4338CA"}
                 strokeWidth="3"
                 strokeLinecap="round"
               />
               <path
                 d="M11 27H37"
-                stroke="#4338CA"
+                stroke={isChapters ? "#FFFFFF" : "#4338CA"}
                 strokeWidth="3"
                 strokeLinecap="round"
               />
               <path
                 d="M11 39H37"
-                stroke="#4338CA"
+                stroke={isChapters ? "#FFFFFF" : "#4338CA"}
                 strokeWidth="3"
                 strokeLinecap="round"
               />
