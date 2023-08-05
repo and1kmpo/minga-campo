@@ -28,7 +28,6 @@ export default function ChapterForm() {
             manga_id
         };
 
-
         console.log(dataForm)
 
         axios.post(apiUrl + '/chapters', dataForm, headers)
