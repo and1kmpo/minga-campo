@@ -28,16 +28,6 @@ export default function ChapterForm() {
       manga_id,
     };
 
-
-     
-
-        axios.post(apiUrl + '/chapters', dataForm, headers)
-            .then((res) => Swal.fire({
-                icon: 'success',
-                text: 'chapter added!',
-                confirmButtonColor: "purple"
-        console.log(dataForm)
-
     axios
       .post(apiUrl + "/chapters", dataForm, headers)
       .then((res) =>
