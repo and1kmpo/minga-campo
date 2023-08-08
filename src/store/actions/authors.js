@@ -9,7 +9,7 @@ let saveProfile = createAction("saveProfile", (obj) => {
 });
 
 const authorsActions = {
-  saveProfile
+  saveProfile,
 };
 
 export default authorsActions;

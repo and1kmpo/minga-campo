@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import apiURL from "../apiUrl";
 import headers from "../utils/headers";
+import { useSelector } from "react-redux";
 
 async function signout(event) {
   event.preventDefault();
@@ -29,10 +30,18 @@ function catch_token(setOptions) {
 
 export default function NavBar() {
   const [options, setOptions] = useState([{ to: "/", title: "Home" }]);
-  const [photo, setPhoto] = useState();
+
   const [email, setEmail] = useState();
   const location = useLocation();
-  const isChapters = location.pathname.startsWith("/chapter/")
+  const isChapters = location.pathname.startsWith("/chapter/");
+
+  // store
+  const store = useSelector((store) => store);
+
+  // variables globales del store
+  const photo = store.author.profile;
+
+  console.log("photo:", photo);
   useEffect(() => {
     let token = localStorage.getItem("token");
     //console.log(token);
@@ -57,11 +66,10 @@ export default function NavBar() {
               { to: "/me", title: "Profile" },
               { to: "/mangas/1", title: "Mangas" },
               { to: "/manga-form", title: "Create Manga" },
-              { to: '/manga/:manga_id/chapter-form', title: "New Chapter" },
+              { to: "/manga/:manga_id/chapter-form", title: "New Chapter" },
               // {to: '/chapter/:id/:page', title: "Chapters" },
-              { to: "/", title: "Sign Out" }
-            ])
-            
+              { to: "/", title: "Sign Out" },
+            ]);
           } else if (res.data.response.user.role === 3) {
             setOptions([
               { to: "/", title: "Home" },
@@ -69,7 +77,6 @@ export default function NavBar() {
               { to: "/", title: "Sign Out" },
             ]);
           }
-          setPhoto(res.data.response.user.photo);
           setEmail(res.data.response.user.email);
         })
         .catch(() => catch_token(setOptions));
@@ -151,9 +158,9 @@ export default function NavBar() {
             <div className="flex ml-2">
               <Link to={"/me"}>
                 <img
-                  className="rounded-full mr-4 w-[40px] h-[40px]"
+                  className="rounded-full mr-4 w-[40px] h-[40px] object-cover"
                   src={
-                    photo ||
+                    photo?.photo ||
                     "https://publicdomainvectors.org/tn_img/abstract-user-flat-4.webp"
                   }
                   alt=""

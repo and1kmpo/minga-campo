@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 4000); 
+    }, 4000);
   }, []);
 
   return (

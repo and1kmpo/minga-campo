@@ -11,7 +11,6 @@ export default function MangaForm() {
   useEffect(() => {
     axios(apiUrl + "/categories")
       .then((res) => {
-        console.log(res.data.response);
         setCategories(res.data.response);
       })
       .catch((err) => console.error(err));
@@ -43,7 +42,6 @@ export default function MangaForm() {
         })
       )
       .catch((err) => {
-        console.log(err.response);
         Swal.fire({
           icon: "error",
           html: err.response.data?.messages
@@ -60,9 +58,9 @@ export default function MangaForm() {
 
   return (
     <>
-      <div className="flex w-full h-screen items-center justify-between overflow-x-hidden mb-6   ">
+      <div className="flex w-full h-screen items-center justify-between overflow-x-hidden mb-6 ">
         <div className="grid gap-5 my-32 mb-6 flex-col mt-[10%]  lg:mt-[5%] justify-center items-center  w-screen lg:w-[50%] lg:left-[50%] ">
-        <h1 className=' text-3xl text-center font-semibold'> New Manga</h1>
+          <h1 className=" text-3xl text-center font-semibold"> New Manga</h1>
           <div className="">
             <input
               type="text"
