@@ -41,7 +41,6 @@ export default function NavBar() {
   // variables globales del store
   const photo = store.author.profile;
 
-  console.log("photo:", photo);
   useEffect(() => {
     let token = localStorage.getItem("token");
     //console.log(token);
