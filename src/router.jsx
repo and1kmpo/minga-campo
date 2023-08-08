@@ -74,7 +74,7 @@ const router = createBrowserRouter([
             JSON.parse(localStorage.getItem("user")).role === 3) &&
           redirect("/"),
       },
-      { path: '/me', element: <Author></Author>},
+      { path: '/me', element: <Author/>},
       { path: "/mangas/:page", element: <Mangas /> },
       { path: "/mangas/:page", element: <Mangas /> },
       {
