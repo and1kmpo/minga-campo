@@ -6,21 +6,38 @@ import axios from "axios";
 import apiUrl from "../apiUrl";
 import headers from "../utils/headers";
 import SwitchMangas from "../components/SwitchMangas";
+import { useDispatch, useSelector } from "react-redux";
+import authorsActions from "../store/actions/authors";
+
+const { saveProfile } = authorsActions;
 
 export default function Author() {
-  const [profileData, setprofileData] = useState([]);
+  //const [profileData, setprofileData] = useState([]); se va a pasar a estado globaL
   const [viewMangaData, viewMangasData] = useState([]);
-
+  const dispatch = useDispatch();
+  const store = useSelector((store) => store);
+  const profile = store.author.profile;
+  
   useEffect(() => {
-    axios
-      .get(apiUrl + "/authors/me", headers())
-      .then((res) => {
-        console.log(res.data.response.profile);
-        setprofileData(res.data.response.profile);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos de la API:", error);
-      });
+    // si no existen los datos en el store de redux realizo la peticion
+    if (!profile?._id) {
+      console.log('====================================');
+      console.log('aca no existe el profile:');
+      console.log('====================================');
+      axios
+        .get(apiUrl + "/authors/me", headers())
+        .then((res) => {
+          dispatch(
+            saveProfile({
+              profile: res.data.response.profile,
+            })
+          );
+        })
+        .catch((error) => {
+          console.error("Error al obtener los datos de la API:", error);
+        });
+    }
+    
   }, []);
 
   useEffect(() => {
@@ -40,18 +57,17 @@ export default function Author() {
       <div className="w-full flex justify-start align-center flex-col pt-20 pb-40 h-screen bg-[#EBEBEB]">
         <div className="flex justify-center me-auto mx-auto">
           <img
-            src={profileData.photo}
-            alt={profileData.name}
+            src={profile.photo}
+            alt={profile.name}
             className="rounded-[50%] w-16 h-16 me-5"
           />
           <div className="mx-auto d-flex mb-4">
             <h4 className="text-lg font-medium capitalize">
-              {profileData.name} {profileData.last_name}
+              {profile.name} {profile.last_name}
             </h4>
             <h5 className="text-xs text-gray-600 capitalize">
-              {profileData.city}, {profileData.country}
+              {profile.city}, {profile.country}
             </h5>
-            <h5 className="text-xs text-gray-600 capitalize">16/02/2000</h5>
           </div>
           <RiEditBoxLine className="mt-7 mx-2" />
         </div>

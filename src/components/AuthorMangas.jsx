@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import apiUrl from "../apiUrl";
 import headers from "../utils/headers";
+import { useSelector } from "react-redux"; // hook para selecionar un estado global
 
 export default function AuthorMangas() {
   const [newsMangasData, newMangasData] = useState([]);
   const [oldsMangasData, oldMangasData] = useState([]);
-  const [viewMangaData, viewMangasData] = useState(false);
 
+  const store = useSelector((store) => store);
+  console.log("====================================");
+  console.log("store:", store);
+  console.log("====================================");
   useEffect(() => {
     axios
       .get(apiUrl + "/mangas/news", headers())
@@ -15,7 +19,6 @@ export default function AuthorMangas() {
         console.log("mangas news:", res.data.response);
         newMangasData(res.data.response.news);
         oldMangasData(res.data.response.old);
-        console.log("default:", viewMangaData);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);

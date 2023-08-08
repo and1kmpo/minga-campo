@@ -14,15 +14,6 @@ export default function authorForm() {
             enlace: enlace.current.value
 
         }
-        console.log(dataAuthor)
-
-
-        console.log(name.current.value)
-        console.log(lastname.current.value)
-        console.log(address.current.value)
-        console.log(date.current.value)
-        console.log(enlace.current.value)
-
     }
 
     const name = useRef()
@@ -37,7 +28,6 @@ export default function authorForm() {
                 <div className='  flex flex-col  mt-[10%] md:mt-[14%] lg:mt-[10%] justify-center items-center  w-screen '>
                     <h1 className=' text-4xl text-center '> New Author</h1>
                     <div className='flex flex-col mt-8 gap-6'>
-
                         <input ref={name} className=" px-4 h-[50px] w-[300px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple  " type="text" name="name" id="name" placeholder="Name" required />
                         <input ref={last_name} className=" px-4  h-[50px] w-[300px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple " type="text" name="lastname" id="lastname" placeholder="Last Name" required />
                         <input ref={address} className=" px-4  h-[50px] w-[300px] border-b hover:rounded-lg hover:border-rounded  hover:border-purple" type="text" name="address" id="address" placeholder="City, Country" required />
