@@ -4,7 +4,6 @@ import Loading_animation from "./Loading_animation";
 
 function Nav_2() {
   const store = useSelector((store) => store)
-  console.log(store.chapter)
   const { title, order } = store.chapter;
 
   if (!title || order === null) {
