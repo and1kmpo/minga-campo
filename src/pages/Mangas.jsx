@@ -6,7 +6,6 @@ import manga_actions from "../store/actions/mangas";
 import CardManga from "../components/CardManga";
 import { useSelector, useDispatch } from "react-redux";
 import imageBackgroundManga from "../assets/backgroundMangas.png"
-import LoadingIcon from "../components/LoadingIcon";
 const { save_checks, save_title } = manga_actions;
 
 export default function Mangas() {
@@ -118,79 +117,72 @@ export default function Mangas() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen mb-4 font-poppins">
-            <div className="flex flex-col items-center justify-center w-full h-[369px] bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url(${imageBackgroundManga})` }}>
-                <div className="absolute inset-0 bg-black opacity-50 md:hidden"></div>
-                <p className="relative w-[162px] text-center text-white font-bold text-[40px] leading-[38.07px] font-roboto m-10">Mangas</p>
-                <div className="relative w-[90%] lg:w-[60%]">
-                    <label
-                        htmlFor="search-input"
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-primary pointer-events-none"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                    </label>
-                    <input
-                        id="search-input"
-                        type="text"
-                        placeholder="Find your manga here"
-                        className="mx-auto block font-poppins font-normal text-[24px] leading-[22.84px] p-[10px] text-center w-full rounded-[80px] lg:rounded-[10px] border-2 hover:border-primary shadow-md focus:outline-none"
-                        onChange={(event) =>
-                            dispatch(save_title({ title: event.target.value }))
-                        }
-                        defaultValue={store.mangas.text}
-                    />
-                </div>
-            </div>
-
-            <div className="flex flex-col items-center bg-[#EBEBEB] -top-[70px] relative rounded-t-[80px] w-full lg:w-[90%] lg:rounded-2xl">
-                <div className="flex justify-evenly md:justify-evenly lg:justify-start w-[85%] text-center mt-14">
-                    {category.map((cat) => (
+        <>
+            <div className="flex flex-col items-center justify-center min-h-screen mb-4 font-poppins">
+                <div className="flex flex-col items-center justify-center w-full h-[369px] bg-no-repeat bg-center bg-cover" style={{ backgroundImage: `url(${imageBackgroundManga})` }}>
+                    <div className="absolute inset-0 bg-black opacity-50 md:hidden"></div>
+                    <p className="relative w-[162px] text-center text-white font-bold text-[40px] leading-[38.07px] font-roboto m-10">Mangas</p>
+                    <div className="relative w-[90%] lg:w-[60%]">
                         <label
-                            key={cat._id}
-                            className="p-3 rounded-full cursor-pointer lg:mr-2 lg:ml-2 capitalize"
-                            style={{
-                                backgroundColor: selectedCategories.includes(cat._id)
-                                    ? cat.color
-                                    : cat.hover,
-                                color: selectedCategories.includes(cat._id)
-                                    ? cat.hover
-                                    : cat.color,
-                            }}
+                            htmlFor="search-input"
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2"
                         >
-                            <input
-                                type="checkbox"
-                                className="hidden"
-                                name={cat._id}
-                                checked={selectedCategories.includes(cat._id)}
-                                onChange={() => handleCategoryChange(cat._id)}
-                                style={{ backgroundColor: cat.color }}
-                            />{" "}
-                            {cat.name}
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 text-primary pointer-events-none"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                            </svg>
                         </label>
-                    ))}
+                        <input
+                            id="search-input"
+                            type="text"
+                            placeholder="Find your manga here"
+                            className="mx-auto block font-poppins font-normal text-[24px] leading-[22.84px] p-[10px] text-center w-full rounded-[80px] lg:rounded-[10px] border-2 hover:border-primary shadow-md focus:outline-none"
+                            onChange={(event) =>
+                                dispatch(save_title({ title: event.target.value }))
+                            }
+                            defaultValue={store.mangas.text}
+                        />
+                    </div>
                 </div>
 
-                {loading ? (
-                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2 md:gap-5">
-                        <div className="h-full flex flex-col justify-center items-center col-span-2 mt-5 lg:mt-10">
-                            <LoadingIcon />
-                            <p className="text-lg font-semibold">Loading mangas...</p>
-                        </div>
+                <div className="flex flex-col items-center bg-[#EBEBEB] -top-[70px] relative rounded-t-[80px] w-full lg:w-[90%] lg:rounded-2xl">
+                    <div className="flex justify-evenly md:justify-evenly lg:justify-start w-[85%] text-center mt-14">
+                        {category.map((cat) => (
+                            <label
+                                key={cat._id}
+                                className="p-3 rounded-full cursor-pointer lg:mr-2 lg:ml-2 capitalize"
+                                style={{
+                                    backgroundColor: selectedCategories.includes(cat._id)
+                                        ? cat.color
+                                        : cat.hover,
+                                    color: selectedCategories.includes(cat._id)
+                                        ? cat.hover
+                                        : cat.color,
+                                }}
+                            >
+                                <input
+                                    type="checkbox"
+                                    className="hidden"
+                                    name={cat._id}
+                                    checked={selectedCategories.includes(cat._id)}
+                                    onChange={() => handleCategoryChange(cat._id)}
+                                    style={{ backgroundColor: cat.color }}
+                                />{" "}
+                                {cat.name}
+                            </label>
+                        ))}
                     </div>
-                ) : (
+
                     <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:grid-rows-2 md:gap-5">
                         {visibleMangas.map((each) => {
                             return (
@@ -205,29 +197,27 @@ export default function Mangas() {
                             );
                         })}
                     </div>
-                )}
 
-
-                <div className="w-full text-center mt-6 mb-6">
-                    {currentPage > 1 && (
-                        <input
-                            type="button"
-                            value={"prev"}
-                            onClick={handleLoadPrevious}
-                            className="py-2 px-4 bg-gradient-to-r from-[#4338CA] to-[#5E52F3] hover:bg-blue-600 text-white font-bold rounded-full shadow-md cursor-pointer mr-2"
-                        />
-                    )}
-                    {currentPage < totalPages && visibleMangas.length === itemsPerPage && (
-                        <input
-                            type="button"
-                            value={"next"}
-                            onClick={handleLoadNext}
-                            className="py-2 px-4 bg-gradient-to-r from-[#4338CA] to-[#5E52F3] hover:bg-blue-600 text-white font-bold rounded-full shadow-md cursor-pointer mr-2"
-                        />
-                    )}
+                    <div className="w-full text-center mt-6  mb-6">
+                        {currentPage > 1 && (
+                            <input
+                                type="button"
+                                value={"prev"}
+                                onClick={handleLoadPrevious}
+                                className="py-2 px-4 bg-gradient-to-r from-[#4338CA] to-[#5E52F3] hover:bg-blue-600 text-white font-bold rounded-full shadow-md cursor-pointer mr-2"
+                            />
+                        )}
+                        {(currentPage < totalPages && visibleMangas.length === itemsPerPage) && (
+                            <input
+                                type="button"
+                                value={"next"}
+                                onClick={handleLoadNext}
+                                className="py-2 px-4 bg-gradient-to-r from-[#4338CA] to-[#5E52F3] hover:bg-blue-600 text-white font-bold rounded-full shadow-md cursor-pointer mr-2"
+                            />
+                        )}
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </>
     );
-
 }
