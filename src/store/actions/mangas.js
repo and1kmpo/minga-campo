@@ -28,6 +28,14 @@ const save_manga = createAction("save_manga", (obj) => {
   };
 });
 
-const manga_actions = { save_title, save_manga, saveMangasNews };
+const save_checks = createAction("save_checks", (checks) => {
+  return {
+    payload: {
+      checks,
+    },
+  };
+});
+
+const manga_actions = { save_title, save_manga, saveMangasNews, save_checks };
 
 export default manga_actions;
