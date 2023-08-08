@@ -14,7 +14,7 @@ const App = () => {
       {isLoading ? (
         <div className="text-2xl font-bold ">Loading...</div>
       ) : (
-        <div className="text-2xl font-bold">Content loaded!</div>
+        <div className="text-2xl font-bold">Content Not found!</div>
       )}
     </div>
   );

@@ -14,10 +14,12 @@ import NotAllowed from './pages/NotAllowed';
 import Author from './pages/Author';
 
 
+
 const router = createBrowserRouter([
   {
     path: "/", // con una ruta renderizo un componente de tipo layout
     element: <Main />,
+
     children: [
       // rutas hijas
       { path: "/", element: <Index /> },

@@ -29,7 +29,7 @@ export default function ChapterForm() {
         };
 
         console.log(dataForm)
-      
+
         axios.post(apiUrl + '/chapters', dataForm, headers)
             .then((res) => Swal.fire({
                 icon: 'success',
