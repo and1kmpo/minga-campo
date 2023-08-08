@@ -1,9 +1,22 @@
-export default function CardManga({ title, category, imageSrc, color }) {
+import { Link as Anchor } from 'react-router-dom';
+
+export default function CardManga({ title, category, imageSrc, color, manga_id }) {
     return (
         <div className="min-w-[400px] h-[200px] bg-white flex items-center mt-6 rounded-xl border-l-8 font-poppins shadow-xl" style={{ borderColor: color }}>
-            <div className="flex flex-col p-4" >
-                <h1 className="text-black text-xl font-medium">{title}</h1>
-                <p className="text-lg mb-4 capitalize font-medium" style={{ color: color }}>{category}</p>
+            <div className="flex flex-col p-4 justify-between" >
+                <div>
+                    <h1 className="text-black text-xl font-medium">{title}</h1>
+                    <p className="text-lg mb-4 capitalize font-medium" style={{ color: color }}>{category}</p>
+                </div>
+                <div>
+                    <Anchor to={'/manga/' + manga_id + '/1'}>
+                        <button
+                            className='bg-[#D1FBF0] text-[#00BA88] hover:bg-[#00BA88] hover:text-[#D1FBF0] font-semibold w-16 h-8 flex items-center justify-center rounded-full'
+                        >
+                            Read
+                        </button>
+                    </Anchor>
+                </div>
             </div>
             <div className="flex-grow"></div>
             <img

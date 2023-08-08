@@ -1,11 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
 import manga_actions from "../actions/mangas";
 
-const { save_title, save_manga } = manga_actions;
+const { save_title, save_manga, save_checks } = manga_actions;
 
 const initialState = {
   text: "",
-  //checks:[]
+  selectedCategoryIds: [], // Se mantiene el array de IDs
+  checks: [], // Se almacenan los IDs seleccionados en los filtros de checks
   manga: null,
 };
 
@@ -21,16 +22,17 @@ const manga_reducer = createReducer(initialState, (builder) =>
         return new_state;
       }
     )
-    .addCase(
-      save_manga,
-      (state, action) => {
-        const new_state = {
-          ...state,
-          manga: action.payload.manga,
-        }
-        return new_state
-      }
-    )
+    .addCase(save_manga, (state, action) => {
+      const new_state = {
+        ...state,
+        manga: action.payload.manga,
+      };
+      return new_state;
+    })
+    .addCase(save_checks, (state, action) => {
+      const newState = { ...state, checks: action.payload?.checks };
+      return newState;
+    })
 );
 
 export default manga_reducer;
