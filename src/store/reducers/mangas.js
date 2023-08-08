@@ -21,10 +21,18 @@ const manga_reducer = createReducer(initialState, (builder) =>
         return new_state;
       }
     )
-    .addCase(saveMangasNews, (state, action) => {
+    .addCase(saveMangasNews, (stateManga, action) => {
       const newState = {
+<<<<<<< Updated upstream
         ...state,
         mangas_news: action.payload.mangas_news,
+=======
+        ...stateManga,
+        all: action.payload.mangas_news?.all,
+        new: action.payload.mangas_news?.new,
+        old: action.payload.mangas_news?.old,
+        logo: action.payload.mangas_news?.logo,
+>>>>>>> Stashed changes
       };
       return newState;
     })

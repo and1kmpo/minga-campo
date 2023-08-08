@@ -12,8 +12,15 @@ import authorsActions from "../store/actions/authors";
 const { saveProfile } = authorsActions;
 
 export default function Author() {
+<<<<<<< Updated upstream
   //const [profileData, setprofileData] = useState([]); se va a pasar a estado globaL
   const [viewMangaData, viewMangasData] = useState([]);
+=======
+  // store
+  const store = useSelector((store) => store);
+
+  // dispatch
+>>>>>>> Stashed changes
   const dispatch = useDispatch();
   const store = useSelector((store) => store);
   const profile = store.author.profile;

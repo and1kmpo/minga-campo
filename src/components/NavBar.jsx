@@ -32,7 +32,18 @@ export default function NavBar() {
   const [photo, setPhoto] = useState();
   const [email, setEmail] = useState();
   const location = useLocation();
+<<<<<<< Updated upstream
   const isChapters = location.pathname.startsWith("/chapter/")
+=======
+  const isChapters = location.pathname.startsWith("/chapter/");
+
+  // store
+  const store = useSelector((store) => store);
+
+  // variables globales del store
+  const photo = store.author.profile;
+
+>>>>>>> Stashed changes
   useEffect(() => {
     let token = localStorage.getItem("token");
     //console.log(token);
