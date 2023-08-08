@@ -1,18 +1,17 @@
-import { createBrowserRouter, redirect } from 'react-router-dom';
-import Main from './layouts/Main';
-import Index from './pages/Index';
-import MangaForm from './pages/MangaForm';
-import ChapterForm from './pages/ChapterForm';
-import SignIn from './pages/Signin';
-import Register from './pages/Register';
-import CiaForm from './pages/CiaForm';
-import AuthorForm from './pages/AuthorForm';
-import Mangas from './pages/Mangas';
-import MangaDetail from './pages/MangaDetail';
-import Chapters from './pages/chapters';
-import NotAllowed from './pages/NotAllowed';
-import Author from './pages/Author';
-
+import { createBrowserRouter, redirect } from "react-router-dom";
+import Main from "./layouts/Main";
+import Index from "./pages/Index";
+import MangaForm from "./pages/MangaForm";
+import ChapterForm from "./pages/ChapterForm";
+import SignIn from "./pages/Signin";
+import Register from "./pages/Register";
+import CiaForm from "./pages/CiaForm";
+import AuthorForm from "./pages/AuthorForm";
+import Mangas from "./pages/Mangas";
+import MangaDetail from "./pages/MangaDetail";
+import Chapters from "./pages/chapters";
+import NotAllowed from "./pages/NotAllowed";
+import Author from "./pages/Author";
 
 
 const router = createBrowserRouter([
@@ -59,12 +58,18 @@ const router = createBrowserRouter([
             JSON.parse(localStorage.getItem("user")).role === 3) &&
           redirect("/"),
       },
-      //Falta configurar NotAllow
+      //configurar NotAllow
       {
-        path: '/NotAllowed', element: <NotAllowed />, loader: () => !localStorage.getItem('user') ||
-          [0, 1, 2, 3].includes(JSON.parse(localStorage.getItem('user')).role) && redirect('/NotAllowed')
+        path: "/NotAllowed",
+        element: <NotAllowed />,
+        loader: () =>
+          !localStorage.getItem("user") ||
+          ([0, 1, 2, 3].includes(
+            JSON.parse(localStorage.getItem("user")).role
+          ) &&
+            redirect("/NotAllowed")),
       },
- 
+
       {
         path: "/author-form",
         element: <AuthorForm />,
@@ -74,7 +79,11 @@ const router = createBrowserRouter([
             JSON.parse(localStorage.getItem("user")).role === 3) &&
           redirect("/"),
       },
-      { path: '/me', element: <Author></Author>},
+      {
+        path: "/me",
+        element: <Author />,
+        loader: () => !localStorage.getItem("user") && redirect("/NotAllowed"),
+      },
       { path: "/mangas/:page", element: <Mangas /> },
       { path: "/mangas/:page", element: <Mangas /> },
       {
@@ -86,7 +95,6 @@ const router = createBrowserRouter([
           redirect("/"),
       },
     ],
-  }
-])
+  },
+]);
 export default router;
-

@@ -11,6 +11,14 @@ const save_title = createAction("save_title", (obj) => {
   };
 });
 
+const saveMangasNews = createAction("saveMangasNews", (obj) => {
+  return {
+    payload: {
+      mangas_news: obj.mangas_news,
+    },
+  };
+});
+
 //en esta accion obj es el manga a guardar en el store
 const save_manga = createAction("save_manga", (obj) => {
   return {
@@ -28,6 +36,6 @@ const save_checks = createAction("save_checks", (checks) => {
   };
 });
 
-const manga_actions = { save_title, save_manga, save_checks };
+const manga_actions = { save_title, save_manga, saveMangasNews, save_checks };
 
 export default manga_actions;
