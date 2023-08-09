@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 4000); 
+    }, 4000);
   }, []);
 
   return (
@@ -14,7 +14,7 @@ const App = () => {
       {isLoading ? (
         <div className="text-2xl font-bold ">Loading...</div>
       ) : (
-        <div className="text-2xl font-bold">Content loaded!</div>
+        <div className="text-2xl font-bold">Content Not found!</div>
       )}
     </div>
   );

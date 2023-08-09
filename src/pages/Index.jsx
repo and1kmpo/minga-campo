@@ -7,6 +7,5 @@ export default function Index() {
       <Welcome />
       <Carousel />
     </div>
-
   )
 }
