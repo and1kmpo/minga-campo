@@ -26,8 +26,8 @@ export default function Carousel() {
     counter !== 0 ? modify(counter - 1) : modify(categories.length - 1);
 
   return (
-    <div className="hidden lg:flex px-16 py-12">
-      <div className="h-[180px] xl:h-[265px] w-full rounded-md flex items-center"
+    <div className="hidden lg:flex px-14 py-7 xl:py-10">
+      <div className="h-[165px] xl:h-[245px] w-full rounded-md flex items-center"
            style={{ backgroundColor: categories[counter]?.color }}>
 
         <div className="pl-6" onClick={prev}>
@@ -36,21 +36,21 @@ export default function Carousel() {
 
         <div className="w-[50%] h-full flex justify-evenly">
           <img
-            className="w-[187px] xl:w-[276px] h-[208px] xl:h-[306px] self-end"
+            className="w-[175px] xl:w-[270px] h-[190px] xl:h-[286px] mr-8 self-end"
             src={categories[counter]?.character_photo}
             alt="character"></img>
           <img
-            className="w-[122px] xl:w-[180px] h-[183px] xl:h-[270px] -mt-[36px]"
+            className="w-[132px] xl:w-[180px] h-[170px] xl:h-[260px] -mt-[20px] xl:-mt-[30px] rounded-sm"
             src={categories[counter]?.cover_photo}
             alt="cover"></img>
         </div>
 
-        <div className="w-[50%] flex flex-col justify-center font-Roboto pl-24 pr-40"
+        <div className=" w-[50%] flex flex-col justify-center font-Roboto pl-10 pr-20"
              style={{ color: categories[counter]?.hover }}>
           <h3 className="text-[24px] font-medium">
             {categories[counter]?.name.toUpperCase()}
           </h3>
-          <p className="text-[14px] font-normal leading-[13.33px]">
+          <p className="text-[14px] xl:text-xl font-normal leading-[14.33px]">
             {categories[counter]?.description}
           </p>
         </div>
