@@ -26,7 +26,7 @@ export default function Carousel() {
     counter !== 0 ? modify(counter - 1) : modify(categories.length - 1);
 
   return (
-    <div className="hidden lg:flex px-12 py-8">
+    <div className="hidden lg:flex px-16 py-12">
       <div className="h-[180px] xl:h-[265px] w-full rounded-md flex items-center"
            style={{ backgroundColor: categories[counter]?.color }}>
 
@@ -40,7 +40,7 @@ export default function Carousel() {
             src={categories[counter]?.character_photo}
             alt="character"></img>
           <img
-            className="w-[122px] xl:w-[180px] h-[183px] xl:h-[270px] -mt-[40px]"
+            className="w-[122px] xl:w-[180px] h-[183px] xl:h-[270px] -mt-[36px]"
             src={categories[counter]?.cover_photo}
             alt="cover"></img>
         </div>
