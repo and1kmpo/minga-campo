@@ -12,6 +12,7 @@ import MangaDetail from "./pages/MangaDetail";
 import Chapters from "./pages/chapters";
 import NotAllowed from "./pages/NotAllowed";
 import Author from "./pages/Author";
+import EditChapter from "./pages/EditChapter"
 
 
 const router = createBrowserRouter([
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
       },
       { path: "/manga/:manga_id/:page", element: <MangaDetail /> },
       {
-        path: "manga/:manga_id/chapter-form",
+        path: "/manga/:manga_id/chapter-form",
         element: <ChapterForm />,
         loader: () =>
           (JSON.parse(localStorage.getItem("user")).role === 0 ||
@@ -85,7 +86,6 @@ const router = createBrowserRouter([
         loader: () => !localStorage.getItem("user") && redirect("/NotAllowed"),
       },
       { path: "/mangas/:page", element: <Mangas /> },
-      { path: "/mangas/:page", element: <Mangas /> },
       {
         path: "/chapter/:id/:page",
         element: <Chapters />,
@@ -93,6 +93,10 @@ const router = createBrowserRouter([
           (JSON.parse(localStorage.getItem("user")).role === 0 ||
             JSON.parse(localStorage.getItem("user")).role === 3) &&
           redirect("/"),
+      },
+      {
+        path: "/chapter/edit/:manga_id",
+        element: <EditChapter />
       },
     ],
   },
