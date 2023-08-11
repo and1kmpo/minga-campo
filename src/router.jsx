@@ -21,8 +21,9 @@ const router = createBrowserRouter([
     element: <Main />,
 
     children: [
-      // rutas hijas
+      // home
       { path: "/", element: <Index /> },
+      // auth
       {
         path: "/register",
         element: <Register />,
@@ -33,33 +34,7 @@ const router = createBrowserRouter([
         element: <SignIn />,
         loader: () => localStorage.getItem("user") && redirect("/"),
       },
-      {
-        path: "/manga-form",
-        element: <MangaForm />,
-        loader: () =>
-          (JSON.parse(localStorage.getItem("user")).role === 0 ||
-            JSON.parse(localStorage.getItem("user")).role === 3) &&
-          redirect("/"),
-      },
-      { path: "/manga/:manga_id/:page", element: <MangaDetail /> },
-      {
-        path: "/manga/:manga_id/chapter-form",
-        element: <ChapterForm />,
-        loader: () =>
-          (JSON.parse(localStorage.getItem("user")).role === 0 ||
-            JSON.parse(localStorage.getItem("user")).role === 3) &&
-          redirect("/"),
-      },
-      {
-        path: "/cia-form",
-        element: <CiaForm />,
-        loader: () =>
-          (JSON.parse(localStorage.getItem("user")).role === 1 ||
-            JSON.parse(localStorage.getItem("user")).role === 2 ||
-            JSON.parse(localStorage.getItem("user")).role === 3) &&
-          redirect("/"),
-      },
-      //configurar NotAllow
+      //configurar NotAllowed
       {
         path: "/NotAllowed",
         element: <NotAllowed />,
@@ -70,7 +45,17 @@ const router = createBrowserRouter([
           ) &&
             redirect("/NotAllowed")),
       },
-
+      // companies
+      {
+        path: "/cia-form",
+        element: <CiaForm />,
+        loader: () =>
+          (JSON.parse(localStorage.getItem("user")).role === 1 ||
+            JSON.parse(localStorage.getItem("user")).role === 2 ||
+            JSON.parse(localStorage.getItem("user")).role === 3) &&
+          redirect("/"),
+      },
+      // authors
       {
         path: "/author-form",
         element: <AuthorForm />,
@@ -85,7 +70,26 @@ const router = createBrowserRouter([
         element: <Author />,
         loader: () => !localStorage.getItem("user") && redirect("/NotAllowed"),
       },
+      // mangas
       { path: "/mangas/:page", element: <Mangas /> },
+      {
+        path: "/manga-form",
+        element: <MangaForm />,
+        loader: () =>
+          (JSON.parse(localStorage.getItem("user")).role === 0 ||
+            JSON.parse(localStorage.getItem("user")).role === 3) &&
+          redirect("/"),
+      },
+      { path: "/manga/:manga_id/:page", element: <MangaDetail /> },
+      // chapters
+      {
+        path: "/manga/:manga_id/chapter-form",
+        element: <ChapterForm />,
+        loader: () =>
+          (JSON.parse(localStorage.getItem("user")).role === 0 ||
+            JSON.parse(localStorage.getItem("user")).role === 3) &&
+          redirect("/"),
+      },
       {
         path: "/chapter/:id/:page",
         element: <Chapters />,
