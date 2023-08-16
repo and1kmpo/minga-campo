@@ -12,7 +12,8 @@ import MangaDetail from "./pages/MangaDetail";
 import Chapters from "./pages/chapters";
 import NotAllowed from "./pages/NotAllowed";
 import Author from "./pages/Author";
-import EditChapter from "./pages/EditChapter"
+import EditChapter from "./pages/EditChapter";
+import NewRole from "./pages/NewRole";
 
 
 const router = createBrowserRouter([
@@ -98,6 +99,16 @@ const router = createBrowserRouter([
         path: "/chapter/edit/:manga_id",
         element: <EditChapter />
       },
+      {
+        path: "/new-role",
+        element: <NewRole />,
+        loader: () => {
+          let user = JSON.parse(localStorage.getItem("user"))
+
+          return user
+            ? user.role === 3 ? true : (redirect("/"), false) : (redirect("/"), false)
+        }
+      }
     ],
   },
 ]);
