@@ -14,6 +14,8 @@ import NotAllowed from "./pages/NotAllowed";
 import Author from "./pages/Author";
 import EditChapter from "./pages/EditChapter";
 import NewRole from "./pages/NewRole";
+import AdminPanel from "./pages/AdminPanel";
+
 
 
 const router = createBrowserRouter([
@@ -102,6 +104,16 @@ const router = createBrowserRouter([
       {
         path: "/new-role",
         element: <NewRole />,
+        loader: () => {
+          let user = JSON.parse(localStorage.getItem("user"))
+
+          return user
+            ? user.role === 0 ? true : (redirect("/"), false) : (redirect("/"), false)
+        }
+      },
+      {
+        path: "/admin",
+        element: <AdminPanel />,
         loader: () => {
           let user = JSON.parse(localStorage.getItem("user"))
 
