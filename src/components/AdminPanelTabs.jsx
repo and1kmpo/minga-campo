@@ -6,7 +6,7 @@ const AdminPanelTabs = ({ tabs }) => {
 
 
     return (
-        <div className="w-full mt-6">
+        <div className="w-full  max-w-md mx-auto mt-6">
             <div className="flex">
                 {tabs.map((tab, index) => (
                     <button
