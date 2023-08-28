@@ -9,7 +9,7 @@ const store = configureStore({
   reducer: {
     //Acá vamos a traer los reductores de los diferentes recursos (usuarios, mangas, caps, etc)
     mangas: manga_reducer,
-    chapter: chapter_reducer,
+    chapters: chapter_reducer,
     author: authorReducer,
     comments: comments_reducer
   },
