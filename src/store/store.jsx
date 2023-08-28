@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import manga_reducer from "./reducers/mangas";
 import chapter_reducer from "./reducers/chapters";
 import authorReducer from "./reducers/authors";
+import comments_reducer from "./reducers/comments";
 
 
 const store = configureStore({
@@ -10,6 +11,7 @@ const store = configureStore({
     mangas: manga_reducer,
     chapter: chapter_reducer,
     author: authorReducer,
+    comments: comments_reducer
   },
 });
 

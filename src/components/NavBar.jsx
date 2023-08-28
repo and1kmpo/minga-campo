@@ -172,7 +172,7 @@ export default function NavBar() {
               </div>
             </div>
             <button onClick={() => setShowMenu(false)}>
-              <RiCloseFill className="text-3xl" />
+              <RiCloseFill className="text-3xl text-gray-100" />
             </button>
           </div>
           <div className="pt-5">
