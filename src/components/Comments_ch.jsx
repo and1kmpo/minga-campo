@@ -19,22 +19,20 @@ export default function Comments_ch(each) {
   const [create, setCreate] = useState('')
   const save_comment = useRef('')
   const total = useSelector(store => store.comments.total)
-  const [edit_comment, setEdit] = useState()
+  // const [edit_comment, setEdit] = useState()
   const [user, setUser] = useState()
-  const prev = () => { if (prev_page) { setCurrentPage(prev_page)}}
-  const next = () => { if (next_page) { setCurrentPage(next_page)}}
    
 
 
 
-  const { _id } = useParams()
+  const { id } = useParams()
   const dispatch = useDispatch()
   useEffect(
     () => {
       const local_user = JSON.parse(localStorage.getItem('user'))
       setUser(local_user)
-      dispatch(read_comments(_id, currentPage))
-    }, [dispatch, _id, currentPage]
+      dispatch(read_comments(id, currentPage))
+    }, [dispatch, id, currentPage]
   )
 
   const update_comment = (comment_data) => {
@@ -127,7 +125,7 @@ export default function Comments_ch(each) {
               onClick={() => {
                 const new_comment = create.trim();
                 if (new_comment) {
-                  dispatch(create_comment({ comment: new_comment, chapter_id: _id }))
+                  dispatch(create_comment({ comment: new_comment, chapter_id: id }))
                   setCreate('');
                 }
               }}
@@ -147,9 +145,9 @@ export default function Comments_ch(each) {
               </div>
       </div>
       <div className="flex justify-between bg-gray-200 px-[20%] pb-10 ">
-      <button onClick={prev} className="mt-2 w-[10%] lg:w-[20%]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple">
+      <button onClick={prev_page} className="mt-2 w-[10%] lg:w-[20%]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple">
         Prev</button>  
-        <button onClick={next} className="mt-2 w-[10%] lg:w-[20%]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple" >
+        <button onClick={next_page} className="mt-2 w-[10%] lg:w-[20%]   h-[55px] lg:h-[68px]    font-bolder text-2xl text-gray-100 rounded-full bg-purple" >
         Next</button>  
         </div>
       {/* {prev_page && <button className="flex bg-purple" > Prev</button>}
