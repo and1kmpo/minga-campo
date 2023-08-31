@@ -37,10 +37,10 @@ export default function NavBar() {
   const isChapters = location.pathname.startsWith("/chapter/");
 
   // store
-  const store = useSelector((store) => store);
+  const store_author = useSelector((store) => store.author);
 
   // variables globales del store
-  const photo = store.author.profile;
+  const photo = store_author.profile;
 
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -174,7 +174,7 @@ export default function NavBar() {
               </div>
             </div>
             <button onClick={() => setShowMenu(false)}>
-              <RiCloseFill className="text-3xl" />
+              <RiCloseFill className="text-3xl text-white" />
             </button>
           </div>
           <div className="pt-5">
