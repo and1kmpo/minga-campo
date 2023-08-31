@@ -86,7 +86,7 @@ export default function NavBar() {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <nav className="flex justify-between items-center p-5 absolute w-full">
+    <nav className="flex justify-between w-full absolute top-0 z-20 px-4">
       <div className="flex items-center">
         <button onClick={() => setShowMenu(!showMenu)}>
           <div>
