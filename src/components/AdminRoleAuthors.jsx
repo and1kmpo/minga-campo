@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { update_authors, getAuthors } from '../store/actions/authorsAdmin';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 export const AdminRoleAuthors = ({ author }) => {
     const dispatch = useDispatch()
@@ -15,7 +16,23 @@ export const AdminRoleAuthors = ({ author }) => {
     }, [])
 
     function handleActive(id, change) {
-        dispatch(update_authors({ id, change }));
+        Swal.fire({
+            title: 'Confirmation',
+            text: `Are you sure you want to ${change ? 'activate' : 'deactivate'} this author?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(update_authors({ id, change }));
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Author status updated successfully',
+                    icon: 'success',
+                });
+            }
+        });
     }
 
     return (

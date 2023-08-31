@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { update_companies, getCompanies } from '../store/actions/companiesAdmin';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 export const AdminRoleCompanies = ({ companies }) => {
     const dispatch = useDispatch()
@@ -14,7 +15,23 @@ export const AdminRoleCompanies = ({ companies }) => {
     }, [])
 
     function handleActive(id, change) {
-        dispatch(update_companies({ id, change }));
+        Swal.fire({
+            title: 'Confirmation',
+            text: `Are you sure you want to ${change ? 'activate' : 'deactivate'} this company?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(update_companies({ id, change }));
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Company status updated successfully',
+                    icon: 'success',
+                });
+            }
+        });
     }
 
     return (

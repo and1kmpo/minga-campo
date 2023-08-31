@@ -25,6 +25,7 @@ function catch_token(setOptions) {
     { to: "/", title: "Home" },
     { to: "/register", title: "Register" },
     { to: "/signin", title: "Signin" },
+    { to: "/admin", title: "Admin" },
   ]);
 }
 
@@ -74,6 +75,7 @@ export default function NavBar() {
               { to: "/", title: "Home" },
               { to: "/mangas/1", title: "Mangas" },
               { to: "/", title: "Sign Out" },
+              { to: "/admin", title: "Admin" },
             ]);
           }
           setEmail(res.data.response.user.email);
